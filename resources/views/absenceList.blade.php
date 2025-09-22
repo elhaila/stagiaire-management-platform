@@ -128,9 +128,9 @@
                                             <div class="text-sm font-medium text-gray-900 intern-highlight">
                                                 {{ $absence->internship->demande->person->fullname ?? '—' }}
                                             </div>
-                                            {{-- <div class="text-xs text-gray-500">
+                                            <div class="text-xs text-gray-500">
                                                 {{ $absence->internship->demande->diplome->name ?? '' }}
-                                            </div> --}}
+                                            </div>
                                         </div>
                                     </div>
                                 </td>
