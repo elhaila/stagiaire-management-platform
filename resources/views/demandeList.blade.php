@@ -122,7 +122,7 @@
                                             </div>
                                         </div>
                                         <div class="ml-3">
-                                            <div class="text-sm font-medium text-gray-900 name-highlight">
+                                            <div class="text-gray-900 name-highlight">
                                                 {{ $demande->person->fullname ?? '—' }}
                                             </div>
                                         </div>

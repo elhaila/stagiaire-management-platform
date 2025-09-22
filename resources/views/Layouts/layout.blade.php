@@ -20,8 +20,6 @@
             font-family: 'Inter', sans-serif;
         }
     </style>
-    git config --global user.name "hamza"
-git config --global user.email "hamzaelhaila@example.com"
 
 </head>
     @if (session('success'))

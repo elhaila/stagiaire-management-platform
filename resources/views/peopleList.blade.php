@@ -44,7 +44,7 @@
         <h2 class="text-lg font-semibold mb-4 inline-block">People List</h2>
 
         <!-- Results Container -->
-        <div class="bg-white shadow rounded-lg overflow-hidden">
+        <div class="bg-white shadow rounded-lg overflow-hidden" style="font-size: small">
             <div class="overflow-x-auto">
                 <table class="min-w-full divide-y divide-gray-200">
                     <thead class="bg-gray-50">
@@ -96,7 +96,7 @@
                                         </div>
                                     </div>
                                     <div class="ml-3">
-                                        <div class="text-sm font-medium text-gray-900 name-highlight">{{ $person->fullname }}</div>
+                                        <div class="text-gray-900 name-highlight" style="font-size: small">{{ $person->fullname }}</div>
                                     </div>
                                 </div>
                             </td>
