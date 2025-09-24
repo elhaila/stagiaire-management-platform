@@ -12,7 +12,8 @@ class Absence extends Model
     protected $table = 'absences';
     protected $fillable = [
         'internship_id',
-        'date',
+        'start_date',
+        'end',
         'reason',
         'status',
         'justification',

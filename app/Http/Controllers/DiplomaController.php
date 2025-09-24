@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Diplome;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DiplomaController extends Controller
 {
@@ -79,6 +80,11 @@ class DiplomaController extends Controller
      */
     public function destroy(string $id)
     {
+        $demande = DB::select('select*from demandes where diplome_id = ?',[$id]);
+        if(count($demande)>0){
+            return redirect(route('diplomaList'))->with('error','Diploma con\'t bee deleted because there is intern have this deploma');
+            exit;
+        }
         Diplome::destroy($id);
         return redirect(route('diplomaList'))->with('success','Diploma have been deleted');
     }

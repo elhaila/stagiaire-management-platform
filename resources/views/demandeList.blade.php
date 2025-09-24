@@ -208,7 +208,7 @@
                                                 </a>
                                                 
                                                 @if($demande->status != 'expired')
-                                                    <button onclick="openApprovalModal({{ $demande->id }}, '{{ $demande->person->fullname ?? '' }}', '{{ $demande->start_date ?? '' }}', '{{ $demande->end_date ?? '' }}')" 
+                                                    <button onclick="openApprovalModal({{ $demande->id }}, '{{ $demande->person->fullname ?? '' }}', '{{ $demande->start_date ?? '' }}', '{{ $demande->end_date ?? '' }}', '{{ $demande->project_name ?? '' }}')" 
                                                             class="text-green-600 hover:text-green-800 transition-colors duration-150" 
                                                             title="Approve Demande">
                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
@@ -280,6 +280,12 @@
                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg bg-gray-50 text-gray-600 cursor-not-allowed focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors" 
                                    readonly>
                         </div>
+                        {{-- Project name --}}
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Project Name</label>
+                            <input type="text" id="Project" name="Project"  
+                                   class="w-full px-3 py-2 border border-gray-300 rounded-lg text-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors" >
+                        </div>
 
                         <!-- Start Date -->
                         <div>
@@ -308,7 +314,7 @@
                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg bg-gray-50 text-gray-600 cursor-not-allowed focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors" 
                                    readonly>
                         </div>
-
+                        
                         <!-- Supervisor Selection -->
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">
@@ -326,7 +332,6 @@
                             </select>
                         </div>
                     </div>
-
                     <!-- Hidden fields -->
                     <input type="hidden" name="status" value="accepted">
                     <input type="hidden" name="create_internship" value="1">

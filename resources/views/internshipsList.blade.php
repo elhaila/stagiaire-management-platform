@@ -81,6 +81,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path>
                                 </svg>
                             </th>
+                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Project</th>
                             <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Type</th>
                             <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase cursor-pointer hover:bg-gray-100"
                                 onclick="sortTable('status')">
@@ -153,6 +154,19 @@
                                             </div>
                                         @else
                                             <span class="text-gray-400">No supervisor</span>
+                                        @endif
+                                    </div>
+                                </td>
+
+                                {{-- Project name --}}
+                                <td class="px-4 py-2 text-xs text-gray-700">
+                                    <div class="flex items-center">
+                                        @if($Internship->project_name)
+                                            <div class="ml-2">
+                                                <span class="supervisor-highlight">{{ $Internship->project_name }}</span>
+                                            </div>
+                                        @else
+                                             <span class="supervisor-highlight">___</span>
                                         @endif
                                     </div>
                                 </td>
@@ -277,6 +291,7 @@
                                                            class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
                                                 </div>
                                             </div>
+                                            <input type="hidden" name="status" value="terminated">
 
                                             <div class="flex justify-end space-x-2">
                                                 <button type="button" class="cancel-edit-btn px-3 py-1 text-xs font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-1">

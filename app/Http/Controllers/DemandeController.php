@@ -32,7 +32,7 @@ class DemandeController extends Controller
         ->get();
 
         $recentAbsences = Absence::with(['internship.demande.person'])
-            ->orderBy('date', 'desc')
+            ->orderBy('created_at', 'desc')
             ->limit(5)
             ->get();
 
@@ -320,6 +320,7 @@ class DemandeController extends Controller
     private function approveWithInternship(Request $request, $demande)
     {
         $request->validate([
+            'Project' => 'nullable|string|max:255',
             'internship_start_date' => 'required|date',
             'internship_end_date' => 'required|date|after:internship_start_date',
             'supervisor_id' => 'required|exists:users,id',
@@ -340,6 +341,7 @@ class DemandeController extends Controller
             $internship->start_date = $request->internship_start_date;
             $internship->end_date = $request->internship_end_date;
             $internship->status = $request->internship_status;
+            $internship->project_name = $request->Project;
             $internship->save();
 
             DB::commit();

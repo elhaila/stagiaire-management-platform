@@ -18,6 +18,8 @@ class Internship extends Model
         'start_date',
         'end_date',
         'status',
+        'project_name',
+        'fiche_fin_stage',
         'date_fiche_fin_stage',
         'date_depot_rapport',
     ];

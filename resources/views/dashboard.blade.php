@@ -140,7 +140,13 @@
                             </div>
                         </td>
                         <td class="px-4 py-2 text-sm text-gray-700">
-                            {{ \Carbon\Carbon::parse($absence->date)->format('M d, Y') }}
+                            @if($absence->end_date != null )
+                                {{ \Carbon\Carbon::parse($absence->start_date)->format('M d, Y') }} <strong>to</strong>
+                                {{ \Carbon\Carbon::parse($absence->end_date)->format('M d, Y') }}
+                            @elseif($absence->start_date != null)
+                                {{ \Carbon\Carbon::parse($absence->start_date)->format('M d, Y') }}
+                            
+                            @endif
                         </td>
                         <td class="px-4 py-2 text-sm text-gray-700">
                             {{ $absence->reason ?? '—' }}

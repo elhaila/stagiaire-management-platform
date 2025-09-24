@@ -83,7 +83,6 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path>
                                 </svg>
                             </th>
-                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Type</th>
                             <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase cursor-pointer hover:bg-gray-100"
                                 onclick="sortTable('date')">
                                 Date
@@ -153,22 +152,16 @@
                                     </div>
                                 </td>
 
-                                <!-- Type -->
-                                <td class="px-4 py-2 text-sm text-gray-700">
-                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium 
-                                        {{ strtolower($absence->internship->demande->type ?? '') === 'pfe' ? 'bg-purple-100 text-purple-800' : 'bg-blue-100 text-blue-800' }}">
-                                        <span class="type-highlight">{{ ucfirst($absence->internship->demande->type ?? '—') }}</span>
-                                    </span>
-                                </td>
 
                                 <!-- Date -->
                                 <td class="px-4 py-2 text-sm text-gray-700">
-                                    <div class="flex items-center">
-                                        <div>
-                                            <div class="text-xs text-gray-500">{{ \Carbon\Carbon::parse($absence->date)->format('l') }}</div>
-                                            <div class="font-medium">{{ \Carbon\Carbon::parse($absence->date)->format('M d, Y') }}</div>
-                                        </div>
-                                    </div>
+                                    @if($absence->end_date != null )
+                                        {{ \Carbon\Carbon::parse($absence->start_date)->format('M d') }} <strong>to</strong>
+                                        {{ \Carbon\Carbon::parse($absence->end_date)->format('M d') }}
+                                    @elseif($absence->start_date != null)
+                                        {{ \Carbon\Carbon::parse($absence->start_date)->format('M d') }}
+                                    
+                                    @endif
                                 </td>
 
                                 <!-- Status -->
