@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('absences', function (Blueprint $table) {
             $table->id();
             $table->foreignId('internship_id')->constrained('internships');
-            $table->date('date')->required();
+            $table->date('start_date')->required();
+            $table->date('end_date')->nullable();
             $table->string('reason')->nullable();
             $table->string('status')->default('unjustified');
             $table->text('justification')->nullable();

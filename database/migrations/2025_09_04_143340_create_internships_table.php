@@ -18,6 +18,8 @@ return new class extends Migration
             $table->date('start_date')->required();
             $table->date('end_date')->required();
             $table->string('status')->default('active');
+            $table->string('project_name')->nullable();
+            $table->string('fiche_fin_stage')->nullable();
             $table->date('date_fiche_fin_stage')->nullable();
             $table->date('date_depot_rapport_stage')->nullable();
             $table->timestamps();
