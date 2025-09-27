@@ -7,7 +7,7 @@
     <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-8">
         <div>
             <h1 class="text-3xl font-bold text-gray-900 dark:text-white">
-                Internship Details
+                <span class=" text-indigo-500" >{{ $internships->demande->person->fullname }}</span>  Internship Details
             </h1>
         </div>
         

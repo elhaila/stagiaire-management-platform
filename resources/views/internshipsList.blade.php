@@ -55,7 +55,6 @@
             <!-- Search Statistics -->
             <div class="mt-3 flex items-center justify-between text-sm text-gray-600">
                 <span id="search-stats">Showing {{ $Internships->count() }} of {{ $Internships->count() }} interns</span>
-                {{-- <span id="search-time" class="hidden">Search completed in <span id="search-duration">0</span>ms</span> --}}
             </div>
         </div>
 
@@ -238,11 +237,35 @@
                                                     title="Edit Dates" 
                                                     data-internship-id="{{ $Internship->id }}"
                                                     data-fiche-date="{{ $Internship->date_fiche_fin_stage }}"
-                                                    data-rapport-date="{{ $Internship->date_depot_rapport_stage }}">
+                                                    data-rapport-date="{{ $Internship->date_depot_rapport_stage }}"
+                                                    data-evaluation="{{ $Internship->evaluation }}">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                                                     <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
                                                 </svg>
                                             </button>
+                                        @elseif($Internship->status=='active' || $Internship->status=='pending')
+                                            <a href="{{ route('editInternship', $Internship->id) }}" class="text-purple-600 hover:text-purple-800 transition-colors duration-150">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+                                                </svg>
+                                            </a>
+                                        @elseif($Internship->status=='terminated')
+                                            <button onclick="generateFinStageDocument({{ $Internship->id }})" class="text-purple-600 hover:text-purple-800 transition-colors duration-150" title="Generate Fin de Stage Document">                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
+                                                </svg>
+                                            </button>
+                                            <!-- View existing document if available -->
+                                            @if($Internship->fiche_fin_stage && Storage::disk('public')->exists($Internship->fiche_fin_stage))
+                                                <a href="{{ Storage::url($Internship->fiche_fin_stage) }}" 
+                                                target="_blank"
+                                                class="text-green-600 hover:text-green-800 transition-colors duration-150" 
+                                                title="View Generated Document">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
+                                                    </svg>
+
+                                                </a>
+                                            @endif
                                         @endif
                                     </div>
                                 </td>
@@ -250,7 +273,7 @@
 
                             <!-- Inline Edit Form Row (Hidden by default) -->
                             <tr class="edit-form-row hidden" id="edit-form-{{ $Internship->id }}">
-                                <td colspan="7" class="px-4 py-4 bg-gray-50 border-l-4 border-indigo-500">
+                                <td colspan="8" class="px-4 py-4 bg-gray-50 border-l-4 border-indigo-500" style="width: 100%;">
                                     <form action="{{ route('internships.updateDates', $Internship->id) }}" method="POST" class="inline-edit-form">
                                         @csrf
                                         @method('PUT')
@@ -261,9 +284,9 @@
                                                     <svg class="w-4 h-4 mr-2 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                                                     </svg>
-                                                    Update Internship Completion Dates
+                                                    Update Internship Completion Details
                                                 </h4>
-                                                <p class="text-xs text-gray-500">Update the final stage form and report submission dates</p>
+                                                <p class="text-xs text-gray-500">Update the final stage form and report submission dates along with evaluation</p>
                                             </div>
 
                                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
@@ -290,7 +313,21 @@
                                                            value="{{ $Internship->date_depot_rapport_stage }}"
                                                            class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
                                                 </div>
+
+                                                <!-- evaluation -->
+                                                <div class="col-span-2">
+                                                    <label for="evaluation_{{ $Internship->id }}" class="block text-xs font-medium text-gray-700 mb-1">
+                                                        Evaluation
+                                                    </label>
+                                                    <textarea name="evaluation" 
+                                                              id="evaluation_{{ $Internship->id }}" 
+                                                              class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                                                              placeholder="Enter evaluation notes, feedback, or assessment..."
+                                                              rows="4">{{ $Internship->evaluation ?? '' }}</textarea>
+                                                    <p class="mt-1 text-xs text-gray-500">Provide detailed evaluation of the intern's performance during the internship.</p>
+                                                </div>
                                             </div>
+                                            
                                             <input type="hidden" name="status" value="terminated">
 
                                             <div class="flex justify-end space-x-2">
@@ -304,7 +341,7 @@
                                                     <svg class="w-3 h-3 mr-1 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                                     </svg>
-                                                    Update Dates
+                                                    Update Details
                                                 </button>
                                             </div>
                                         </div>
@@ -332,7 +369,7 @@
         </div>
     </div>
 
-    <!-- JavaScript for Client-Side Search and Inline Editing -->
+    <!-- JavaScript for Client-Side Search and Inline Editing (NO AJAX) -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Search elements
@@ -343,14 +380,8 @@
             const clearButton = document.getElementById('clear-search');
             const tableBody = document.getElementById('internships-table-body');
             const searchStats = document.getElementById('search-stats');
-            const searchTime = document.getElementById('search-time');
-            const searchDuration = document.getElementById('search-duration');
             const noResults = document.getElementById('no-results');
             const paginationContainer = document.getElementById('pagination-container');
-            
-            // Edit elements
-            const editButtons = document.querySelectorAll('.edit-btn');
-            const cancelButtons = document.querySelectorAll('.cancel-edit-btn');
             
             let allRows = Array.from(document.querySelectorAll('.internship-row'));
             let filteredRows = [...allRows];
@@ -369,15 +400,18 @@
             sortSelect.addEventListener('change', performSort);
             clearButton.addEventListener('click', clearAll);
 
-            // Inline editing functionality
-            editButtons.forEach(button => {
-                button.addEventListener('click', function(e) {
+            // Use event delegation for edit and cancel buttons
+            document.addEventListener('click', function(e) {
+                // Handle edit button clicks
+                if (e.target.closest('.edit-btn')) {
                     e.preventDefault();
                     e.stopPropagation();
                     
-                    const internshipId = this.getAttribute('data-internship-id');
-                    const ficheDate = this.getAttribute('data-fiche-date');
-                    const rapportDate = this.getAttribute('data-rapport-date');
+                    const button = e.target.closest('.edit-btn');
+                    const internshipId = button.getAttribute('data-internship-id');
+                    const ficheDate = button.getAttribute('data-fiche-date');
+                    const rapportDate = button.getAttribute('data-rapport-date');
+                    const evaluation = button.getAttribute('data-evaluation');
                     
                     // Hide all other edit forms first
                     hideAllEditForms();
@@ -391,6 +425,7 @@
                         // Populate form fields
                         const ficheInput = document.getElementById('date_fiche_fin_stage_' + internshipId);
                         const rapportInput = document.getElementById('date_depot_rapport_stage_' + internshipId);
+                        const evaluationTextarea = document.getElementById('evaluation_' + internshipId);
                         
                         if (ficheInput) {
                             ficheInput.value = ficheDate || '';
@@ -398,22 +433,33 @@
                         if (rapportInput) {
                             rapportInput.value = rapportDate || '';
                         }
+                        if (evaluationTextarea) {
+                            evaluationTextarea.value = evaluation || '';
+                        }
                         
                         // Focus on first input
                         if (ficheInput) {
                             setTimeout(() => ficheInput.focus(), 100);
                         }
                     }
-                });
-            });
-
-            cancelButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const editForm = this.closest('.edit-form-row');
+                }
+                
+                // Handle cancel button clicks
+                if (e.target.closest('.cancel-edit-btn')) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    const editForm = e.target.closest('.edit-form-row');
                     if (editForm) {
                         editForm.classList.add('hidden');
+                        editForm.style.display = 'none';
                     }
-                });
+                }
+                
+                // Hide edit forms when clicking outside
+                if (!e.target.closest('.edit-btn') && !e.target.closest('.edit-form-row')) {
+                    hideAllEditForms();
+                }
             });
 
             // Perform filtering function
@@ -451,15 +497,9 @@
                 displayResults();
                 highlightSearchTerms(query);
                 
-                const endTime = performance.now();
-                const duration = Math.round(endTime - startTime);
-                searchDuration.textContent = duration;
-                
                 if (query || typeValue || statusValue) {
-                    searchTime.classList.remove('hidden');
                     paginationContainer.style.display = 'none';
                 } else {
-                    searchTime.classList.add('hidden');
                     paginationContainer.style.display = 'block';
                 }
             }
@@ -577,7 +617,7 @@
                         const highlights = row.querySelectorAll('.name-highlight, .supervisor-highlight, .type-highlight');
                         highlights.forEach(element => {
                             const text = element.textContent;
-                            const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\                    hideAllEditForms();')})`, 'gi');
+                            const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\                                                           class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md shadow-sm')})`, 'gi');
                             element.innerHTML = text.replace(regex, '<mark class="bg-yellow-200 px-1">$1</mark>');
                         });
                     });
@@ -593,7 +633,6 @@
                 filteredRows = [...allRows];
                 displayResults();
                 highlightSearchTerms('');
-                searchTime.classList.add('hidden');
                 paginationContainer.style.display = 'block';
                 hideAllEditForms();
             }
@@ -607,58 +646,6 @@
                 });
             }
 
-            // Handle clicks outside to hide edit forms
-            document.addEventListener('click', function(event) {
-                const isEditButton = event.target.closest('.edit-btn');
-                const isEditForm = event.target.closest('.edit-form-row');
-                
-                if (!isEditButton && !isEditForm) {
-                    hideAllEditForms();
-                }
-            });
-
-            // Handle form submissions with AJAX
-            const editForms = document.querySelectorAll('.inline-edit-form');
-            editForms.forEach(form => {
-                form.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    
-                    const formData = new FormData(this);
-                    const actionUrl = this.getAttribute('action');
-                    const submitButton = this.querySelector('button[type="submit"]');
-                    const originalText = submitButton.innerHTML;
-                    
-                    // Show loading state
-                    submitButton.innerHTML = '<svg class="w-3 h-3 mr-1 inline animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>Updating...';
-                    submitButton.disabled = true;
-                    
-                    fetch(actionUrl, {
-                        method: 'POST',
-                        body: formData,
-                        headers: {
-                            'X-Requested-With': 'XMLHttpRequest',
-                        }
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            this.closest('.edit-form-row').classList.add('hidden');
-                            showNotification('Dates updated successfully!', 'success');
-                        } else {
-                            showNotification('Error updating dates: ' + (data.message || 'Unknown error'), 'error');
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                        showNotification('An error occurred while updating the dates.', 'error');
-                    })
-                    .finally(() => {
-                        submitButton.innerHTML = originalText;
-                        submitButton.disabled = false;
-                    });
-                });
-            });
-
             // Keyboard shortcuts
             document.addEventListener('keydown', function(e) {
                 if ((e.ctrlKey || e.metaKey) && e.key === 'f') {
@@ -666,31 +653,25 @@
                     searchInput.focus();
                 }
                 
-                if (e.key === 'Escape' && document.activeElement === searchInput) {
-                    clearAll();
+                if (e.key === 'Escape') {
+                    if (document.activeElement === searchInput) {
+                        clearAll();
+                    } else {
+                        // Close any open edit forms
+                        hideAllEditForms();
+                    }
                 }
             });
-
-            // Simple notification function
-            function showNotification(message, type = 'info') {
-                const notification = document.createElement('div');
-                notification.className = `fixed top-4 right-4 z-50 p-4 rounded-lg shadow-lg text-white transition-all duration-300 ${
-                    type === 'success' ? 'bg-green-500' : 
-                    type === 'error' ? 'bg-red-500' : 
-                    'bg-blue-500'
-                }`;
-                notification.textContent = message;
-                
-                document.body.appendChild(notification);
-                
-                setTimeout(() => {
-                    notification.remove();
-                }, 3000);
-            }
 
             // Initialize
             performSort();
         });
+
+        // Generate Fin Stage Document function
+        function generateFinStageDocument(internshipId) {
+            // Navigate to the generation route
+            window.location.href = `/internships/${internshipId}/generate-fin-stage`;
+        }
 
         // Table header click sorting
         function sortTable(column) {
@@ -751,12 +732,6 @@
 
         .edit-form-row.hidden {
             display: none;
-        }
-        
-        /* Loading state */
-        .searching {
-            opacity: 0.6;
-            pointer-events: none;
         }
         
         /* Focus styles */

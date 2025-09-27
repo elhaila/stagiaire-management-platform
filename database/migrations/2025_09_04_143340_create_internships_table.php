@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('status')->default('active');
             $table->string('project_name')->nullable();
             $table->string('fiche_fin_stage')->nullable();
+            $table->string('evaliation')->nullable();
             $table->date('date_fiche_fin_stage')->nullable();
             $table->date('date_depot_rapport_stage')->nullable();
             $table->timestamps();

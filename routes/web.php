@@ -40,6 +40,7 @@ Route::get('/intern/{id}', [InternshipsController::class, 'show'])->middleware('
 Route::get('/internship/{id}/edit', [InternshipsController::class, 'edit'])->middleware('auth')->name('editInternship');
 Route::put('/internship/{id}', [InternshipsController::class, 'update'])->middleware('auth')->name('internship.update');
 Route::put('/internships/{id}/update-dates', [InternshipsController::class, 'updateDates'])->name('internships.updateDates');
+Route::get('/internships/{id}/generate-fin-stage', [InternshipsController::class, 'generateFinStageDocument'])->name('internships.generateFinStage');
 
 //absence controller
 Route::get('/absenceList', [AbsenceController::class, 'index'])->middleware('auth')->name('absenceList');

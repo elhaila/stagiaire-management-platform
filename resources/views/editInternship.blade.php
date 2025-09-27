@@ -44,6 +44,13 @@
                             @endforeach
                         </select>
                     </div>
+
+                    {{-- Project name --}}
+                    <div>
+                        <label for="Project_name" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Project Name</label>
+                        <input type="text" name="Project_name" id="Project_name" value="{{ old('Project_name', $internship->project_name) }}" class="mt-1 block w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 rounded-lg px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300">
+                    </div>
+
                     {{-- Start Date --}}
                     <div class="sm:col-span-1">
                         <label for="start" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">

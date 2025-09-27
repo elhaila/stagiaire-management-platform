@@ -20,6 +20,7 @@ class Internship extends Model
         'status',
         'project_name',
         'fiche_fin_stage',
+        'evaliation',
         'date_fiche_fin_stage',
         'date_depot_rapport',
     ];
