@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Login - {{ config('app.name', 'Laravel') }}</title>
+    <title>connexion - {{ config('app.name', 'Laravel') }}</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -27,8 +27,8 @@
     <div class="flex items-center justify-center min-h-screen">
         <div class="w-full max-w-md px-8 py-10 mx-4 bg-white rounded-lg shadow-xl dark:bg-gray-800">
             <div class="text-center">
-                <h1 class="text-3xl font-bold text-gray-800 dark:text-white">Welcome Back!</h1>
-                <p class="mt-2 text-gray-500 dark:text-gray-400">Sign in to continue</p>
+                <h1 class="text-3xl font-bold text-gray-800 dark:text-white">Bienvenue!</h1>
+                <p class="mt-2 text-gray-500 dark:text-gray-400">Connexion pour continuer</p>
             </div>
 
             <!-- Demo Credentials Button -->
@@ -38,16 +38,16 @@
                     <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
                     </svg>
-                    Use Demo Credentials
+                    Utiliser les informations d'identification
                 </button>
                 <p class="mt-1 text-xs text-center text-gray-500 dark:text-gray-400">
-                    Click to auto-fill with test account
+                    Cliquez pour remplir automatiquement avec le compte de test
                 </p>
             </div>
 
             <div class="flex items-center my-6">
                 <div class="flex-1 border-t border-gray-300 dark:border-gray-600"></div>
-                <span class="px-3 text-sm text-gray-500 dark:text-gray-400">or enter manually</span>
+                <span class="px-3 text-sm text-gray-500 dark:text-gray-400">ou entrer manuellement</span>
                 <div class="flex-1 border-t border-gray-300 dark:border-gray-600"></div>
             </div>
 
@@ -56,7 +56,7 @@
 
                 <!-- Email Address -->
                 <div>
-                    <label for="email" class="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">Email Address</label>
+                    <label for="email" class="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">adresse e-mail</label>
                     <div class="relative">
                         <input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus autocomplete="username"
                                class="block w-full px-4 py-3 pr-10 text-gray-900 bg-gray-50 border border-gray-300 rounded-md shadow-sm appearance-none focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-indigo-500 dark:focus:border-indigo-500 @error('email') border-red-500 @enderror"
@@ -74,7 +74,7 @@
 
                 <!-- Password -->
                 <div>
-                    <label for="password" class="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">Password</label>
+                    <label for="password" class="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">mot de passe</label>
                     <div class="relative">
                         <input id="password" type="password" name="password" required autocomplete="current-password"
                                class="block w-full px-4 py-3 pr-10 text-gray-900 bg-gray-50 border border-gray-300 rounded-md shadow-sm appearance-none focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-indigo-500 dark:focus:border-indigo-500 @error('password') border-red-500 @enderror"
@@ -102,7 +102,7 @@
                         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path>
                         </svg>
-                        Sign In
+                        connecter
                     </button>
                 </div>
             </form>

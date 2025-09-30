@@ -9,7 +9,7 @@
                 <div class="flex-1 min-w-[250px] relative">
                     <input type="text" 
                            id="search-input" 
-                           placeholder="Search by name, CIN, email, or phone..." 
+                           placeholder="Rechercher par nom, CIN, courriel ou téléphone..." 
                            class="w-full border rounded px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
                     <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
                         <svg class="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -22,26 +22,26 @@
                 <select id="sort-select" class="border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
                     <option value="name-asc">Name A-Z</option>
                     <option value="name-desc">Name Z-A</option>
-                    <option value="date-newest">Newest First</option>
-                    <option value="date-oldest">Oldest First</option>
-                    <option value="demandes-most">Most Demandes</option>
-                    <option value="demandes-least">Least Demandes</option>
+                    <option value="date-newest">Le plus récent en premier</option>
+                    <option value="date-oldest">Le plus ancien en premier</option>
+                    <option value="demandes-most">Le plus de demandes</option>
+                    <option value="demandes-least">Le moins de demandes</option>
                 </select>
 
                 <!-- Clear Search -->
                 <button id="clear-search" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 transition-colors duration-200">
-                    Clear
+                    Effacer
                 </button>
             </div>
             
             <!-- Search Statistics -->
             <div class="mt-3 flex items-center justify-between text-sm text-gray-600">
-                <span id="search-stats">Showing {{ $people->count() }} of {{ $people->count() }} people</span>
+                <span id="search-stats">Affichage de {{ $people->count() }} personnes sur {{ $people->count() }}</span>
                 {{-- <span id="search-time" class="hidden">Search completed in <span id="search-duration">0</span>ms</span> --}}
             </div>
         </div>
 
-        <h2 class="text-lg font-semibold mb-4 inline-block">People List</h2>
+        <h2 class="text-lg font-semibold mb-4 inline-block">Liste de personnes</h2>
 
         <!-- Results Container -->
         <div class="bg-white shadow rounded-lg overflow-hidden" style="font-size: small">
@@ -51,29 +51,29 @@
                         <tr>
                             <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase cursor-pointer hover:bg-gray-100" 
                                 onclick="sortTable('name')">
-                                Name 
+                                Nom complet 
                                 <svg class="w-3 h-3 inline ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path>
                                 </svg>
                             </th>
                             <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">CIN</th>
                             <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Email</th>
-                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Phone</th>
+                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">TÉLÉPHONE</th>
                             <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase cursor-pointer hover:bg-gray-100" 
                                 onclick="sortTable('demandes')">
-                                Demandes 
+                                DEMANDES 
                                 <svg class="w-3 h-3 inline ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path>
                                 </svg>
                             </th>
                             <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase cursor-pointer hover:bg-gray-100" 
                                 onclick="sortTable('date')">
-                                Join Date 
+                                Date d'inscription
                                 <svg class="w-3 h-3 inline ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path>
                                 </svg>
                             </th>
-                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Actions</th>
+                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">ACTIONS</th>
                         </tr>
                     </thead>
                     
@@ -262,7 +262,7 @@
                     });
                     
                     const total = allRows.length;
-                    searchStats.textContent = `Showing ${filteredRows.length} of ${total} people`;
+                    searchStats.textContent = `Affichage de ${filteredRows.length} personnes sur ${total}`;
                 }
             }
 

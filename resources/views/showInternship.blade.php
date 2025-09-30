@@ -18,7 +18,7 @@
                     <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
                     <path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd" />
                 </svg>
-                Edit
+                Modifier
             </a>
             @if($internships->status != 'finished' && $internships->status != 'pending' && $internships->status != 'terminated')
                 <a href="{{ route('CreateAbsence', $internships->id) }}" class="inline-flex items-center px-4 py-2 bg-red-600 text-white font-medium rounded-lg shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
@@ -39,40 +39,44 @@
             {{-- Overview Card --}}
             <div class="bg-white dark:bg-gray-800 shadow-lg rounded-xl overflow-hidden">
                 <div class="p-6">
-                    <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Overview</h2>
+                    <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">aperçu</h2>
                     
                     {{-- Using a grid for a more robust key-value layout --}}
                     <dl class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-6 text-sm">
                         <div class="sm:col-span-1">
-                            <dt class="font-medium text-gray-500 dark:text-gray-400">University</dt>
+                            <dt class="font-medium text-gray-500 dark:text-gray-400">université</dt>
                             <dd class="mt-1 text-gray-900 dark:text-white">{{ $internships->demande->university->name }}</dd>
                         </div>
                         <div class="sm:col-span-1">
-                            <dt class="font-medium text-gray-500 dark:text-gray-400">Diploma</dt>
+                            <dt class="font-medium text-gray-500 dark:text-gray-400">diplôme</dt>
                             <dd class="mt-1 text-gray-900 dark:text-white">{{ $internships->demande->diplome->name }}</dd>
                         </div>
                         <div class="sm:col-span-1">
-                            <dt class="font-medium text-gray-500 dark:text-gray-400">Internship Type</dt>
+                            <dt class="font-medium text-gray-500 dark:text-gray-400">Type de stage</dt>
                             <dd class="mt-1 text-gray-900 dark:text-white">{{ $internships->demande->type }}</dd>
                         </div>
                         <div class="sm:col-span-1">
-                            <dt class="font-medium text-gray-500 dark:text-gray-400">Status</dt>
+                            <dt class="font-medium text-gray-500 dark:text-gray-400">statut</dt>
                             <dd class="mt-1">
                                 <span class="px-3 py-1 text-xs font-medium rounded-full
                                     @if($internships->status == 'active') bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200
                                     @elseif($internships->status == 'pending') bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200
                                     @elseif($internships->status == 'finished') bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200
                                     @else bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200 @endif">
-                                    {{ ucfirst($internships->status) }}
+                                    @if($internships->status === 'active')actif
+                                    @elseif($internships->status === 'pending')pendant
+                                    @elseif($internships->status === 'finished')terminé
+                                    @elseif($internships->status === 'terminated')clôturé
+                                    @endif
                                 </span>
                             </dd>
                         </div>
                         <div class="sm:col-span-1">
-                            <dt class="font-medium text-gray-500 dark:text-gray-400">Start Date</dt>
+                            <dt class="font-medium text-gray-500 dark:text-gray-400">date de début</dt>
                             <dd class="mt-1 text-gray-900 dark:text-white">{{ \Carbon\Carbon::parse($internships->start_date)->format('F j, Y') }}</dd>
                         </div>
                         <div class="sm:col-span-1">
-                            <dt class="font-medium text-gray-500 dark:text-gray-400">End Date</dt>
+                            <dt class="font-medium text-gray-500 dark:text-gray-400">date de fin</dt>
                             <dd class="mt-1 text-gray-900 dark:text-white">{{ \Carbon\Carbon::parse($internships->end_date)->format('F j, Y') }}</dd>
                         </div>
                     </dl>
@@ -91,11 +95,11 @@
                                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                                 </svg>
                                 <div class="ml-4">
-                                    <p class="text-sm font-medium text-gray-900 dark:text-gray-100">Curriculum Vitae (CV)</p>
+                                    <p class="text-sm font-medium text-gray-900 dark:text-gray-100">curriculum vitae (CV)</p>
                                     @if($internships->demande->cv)
-                                        <p class="text-xs text-gray-500 dark:text-gray-400">Uploaded on {{ $internships->demande->updated_at->format('M d, Y') }}</p>
+                                        <p class="text-xs text-gray-500 dark:text-gray-400">Téléchargé {{ $internships->demande->updated_at->format('M d, Y') }}</p>
                                     @else
-                                        <p class="text-xs text-red-500 dark:text-red-400">Not Uploaded</p>
+                                        <p class="text-xs text-red-500 dark:text-red-400">non téléchargé</p>
                                     @endif
                                 </div>
                             </div>
@@ -104,7 +108,7 @@
                                 @if($internships->demande->cv)
                                         <a href="{{ Storage::url($internships->demande->cv) }}" target="_blank"
                                         class="text-indigo-600 hover:text-indigo-800 dark:text-indigo-400 text-sm font-semibold">
-                                            View Current CV
+                                            Afficher le CV actuel
                                         </a>
                                 @endif
                             @endif
@@ -117,11 +121,11 @@
                                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.5L15.232 5.232z" />
                                 </svg>
                                 <div class="ml-4">
-                                    <p class="text-sm font-medium text-gray-900 dark:text-gray-100">End-of-Internship Form</p>
+                                    <p class="text-sm font-medium text-gray-900 dark:text-gray-100">Formulaire de fin de stage</p>
                                     @if($internships->date_fiche_fin_stage)
-                                        <p class="text-xs text-gray-500 dark:text-gray-400">Submitted on: {{ \Carbon\Carbon::parse($internships->date_fiche_fin_stage)->format('M d, Y') }}</p>
+                                        <p class="text-xs text-gray-500 dark:text-gray-400">Soumis le : {{ \Carbon\Carbon::parse($internships->date_fiche_fin_stage)->format('M d, Y') }}</p>
                                     @else
-                                        <p class="text-xs text-red-500 dark:text-red-400">Not Submitted</p>
+                                        <p class="text-xs text-red-500 dark:text-red-400">pas soumis</p>
                                     @endif
                                 </div>
                             </div>
@@ -134,11 +138,11 @@
                                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
                                 </svg>
                                 <div class="ml-4">
-                                    <p class="text-sm font-medium text-gray-900 dark:text-gray-100">Internship Report</p>
+                                    <p class="text-sm font-medium text-gray-900 dark:text-gray-100">rapport de stage</p>
                                     @if($internships->date_depot_rapport_stage)
-                                        <p class="text-xs text-gray-500 dark:text-gray-400">Submitted on: {{ \Carbon\Carbon::parse($internships->date_depot_rapport_stage)->format('M d, Y') }}</p>
+                                        <p class="text-xs text-gray-500 dark:text-gray-400">Soumis le : {{ \Carbon\Carbon::parse($internships->date_depot_rapport_stage)->format('M d, Y') }}</p>
                                     @else
-                                        <p class="text-xs text-red-500 dark:text-red-400">Not Submitted</p>
+                                        <p class="text-xs text-red-500 dark:text-red-400">pas soumis</p>
                                     @endif
                                 </div>
                             </div>
@@ -153,7 +157,7 @@
         <div class="lg:col-span-1">
             <div class="bg-white dark:bg-gray-800 shadow-lg rounded-xl overflow-hidden">
                 <div class="p-6">
-                    <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Absences</h2>
+                    <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">absences</h2>
                     @if($internships->absences->count() > 0)
                         <div class="flow-root">
                             <ul role="list" class="-mb-8">
@@ -173,12 +177,14 @@
                                             </div>
                                             <div class="min-w-0 flex-1 pt-1.5 flex justify-between space-x-4">
                                                 <div>
-                                                    <p class="text-sm text-gray-800 dark:text-gray-200">{{ $absence->reason ?? 'No reason provided' }}</p>
+                                                    <p class="text-sm text-gray-800 dark:text-gray-200">{{ $absence->reason ?? 'Aucune raison fournie' }}</p>
                                                     <p class="text-xs text-gray-500 dark:text-gray-400">{{ \Carbon\Carbon::parse($absence->date)->format('F j, Y') }}</p>
                                                 </div>
                                                 <div class="text-right text-xs whitespace-nowrap text-gray-500">
                                                     <span class="{{ $absence->status == 'justified' ? 'text-green-600' : 'text-red-600' }}">
-                                                        {{ ucfirst($absence->status) }}
+                                                        @if($absence->status == 'justified') Justifié
+                                                        @else injustifié
+                                                        @endif
                                                     </span>
                                                 </div>
                                             </div>
@@ -193,8 +199,8 @@
                             <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                               <path vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
-                            <h3 class="mt-2 text-sm font-medium text-gray-900 dark:text-white">No absences</h3>
-                            <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">This intern has a perfect attendance record.</p>
+                            <h3 class="mt-2 text-sm font-medium text-gray-900 dark:text-white">pas d'absence</h3>
+                            <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Ce stagiaire a un dossier de présence parfait.</p>
                         </div>
                     @endif
                 </div>

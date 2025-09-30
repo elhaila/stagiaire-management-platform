@@ -19,31 +19,31 @@
 
                 <!-- Type Filter -->
                 <select id="type-filter" class="border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <option value="">All Types</option>
+                    <option value="">toute sorte</option>
                     <option value="pfe">PFE</option>
                     <option value="stage">Stage</option>
                 </select>
 
                 <!-- Status Filter -->
                 <select id="status-filter" class="border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <option value="">All Statuses</option>
-                    <option value="active">Active</option>
-                    <option value="pending">Pending</option>
-                    <option value="finished">Finished</option>
-                    <option value="terminated">Terminated</option>
+                    <option value="">tous les statuts</option>
+                    <option value="active">actif</option>
+                    <option value="pending">pendant</option>
+                    <option value="finished">terminé</option>
+                    <option value="terminated">clôturé</option>
                 </select>
 
                 <!-- Sort Options -->
                 <select id="sort-select" class="border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
                     <option value="name-asc">Name A-Z</option>
                     <option value="name-desc">Name Z-A</option>
-                    <option value="date-newest">Newest First</option>
+                    <option value="date-newest">Le plus récent en premier</option>
                     <option value="date-oldest">Oldest First</option>
-                    <option value="start-earliest">Start Date (Earliest)</option>
-                    <option value="start-latest">Start Date (Latest)</option>
-                    <option value="end-earliest">End Date (Earliest)</option>
-                    <option value="end-latest">End Date (Latest)</option>
-                    <option value="status-priority" selected>Status Priority</option>
+                 <option value="start-earliest">Date de début (au plus tôt)</option>
+                   <option value="start-latest">Date de début (Dernière)</option>
+                   <option value="end-earliest">Date de fin (Au plus tôt)</option>
+                     <option value="end-latest">Date de fin (Dernière)</option>
+                    <option value="status-priority" selected>Statut Priorité</option>
                 </select>
 
                 <!-- Clear Search -->
@@ -54,11 +54,11 @@
             
             <!-- Search Statistics -->
             <div class="mt-3 flex items-center justify-between text-sm text-gray-600">
-                <span id="search-stats">Showing {{ $Internships->count() }} of {{ $Internships->count() }} interns</span>
+                <span id="search-stats">Affichage de {{ $Internships->count() }} personnes sur {{ $Internships->count() }}</span>
             </div>
         </div>
 
-        <h2 class="text-lg font-semibold mb-4 inline-block">Interns List</h2>
+        <h2 class="text-lg font-semibold mb-4 inline-block">Liste des stagiaires</h2>
 
         <!-- Results Container -->
         <div class="bg-white shadow rounded-lg overflow-hidden">
@@ -68,37 +68,37 @@
                         <tr>
                             <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase cursor-pointer hover:bg-gray-100" 
                                 onclick="sortTable('name')">
-                                Full Name
+                                nom complet
                                 <svg class="w-3 h-3 inline ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path>
                                 </svg>
                             </th>
                             <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase cursor-pointer hover:bg-gray-100"
                                 onclick="sortTable('supervisor')">
-                                Supervisor
+                                superviseur
                                 <svg class="w-3 h-3 inline ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path>
                                 </svg>
                             </th>
-                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Project</th>
+                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">projet</th>
                             <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Type</th>
                             <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase cursor-pointer hover:bg-gray-100"
                                 onclick="sortTable('status')">
-                                Status
+                                statut
                                 <svg class="w-3 h-3 inline ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path>
                                 </svg>
                             </th>
                             <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase cursor-pointer hover:bg-gray-100"
                                 onclick="sortTable('start')">
-                                Start Date
+                                date de début
                                 <svg class="w-3 h-3 inline ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path>
                                 </svg>
                             </th>
                             <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase cursor-pointer hover:bg-gray-100"
                                 onclick="sortTable('end')">
-                                End Date
+                                date de fin
                                 <svg class="w-3 h-3 inline ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path>
                                 </svg>
@@ -152,7 +152,7 @@
                                                 <span class="supervisor-highlight">{{ $Internship->user->name }}</span>
                                             </div>
                                         @else
-                                            <span class="text-gray-400">No supervisor</span>
+                                            <span class="text-gray-400">aucun superviseur</span>
                                         @endif
                                     </div>
                                 </td>
@@ -189,21 +189,20 @@
                                         @if($Internship->status === 'active')
                                             <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
                                                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                                            </svg>
+                                            </svg>actif
                                         @elseif($Internship->status === 'pending')
                                             <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
                                                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
-                                            </svg>
+                                            </svg>pendant
                                         @elseif($Internship->status === 'finished')
                                             <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
                                                 <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                                            </svg>
+                                            </svg>terminé
                                         @elseif($Internship->status === 'terminated')
                                             <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
                                                 <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-                                            </svg>
+                                            </svg>clôturé
                                         @endif
-                                        {{ ucfirst($Internship->status ?? '') }}
                                     </span>
                                 </td>
 
@@ -263,7 +262,6 @@
                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                                                         <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
                                                     </svg>
-
                                                 </a>
                                             @endif
                                         @endif
@@ -277,23 +275,22 @@
                                     <form action="{{ route('internships.updateDates', $Internship->id) }}" method="POST" class="inline-edit-form">
                                         @csrf
                                         @method('PUT')
-                                        
                                         <div class="bg-white rounded-lg p-4 shadow-sm border">
                                             <div class="mb-3">
                                                 <h4 class="text-sm font-medium text-gray-900 mb-2 flex items-center">
                                                     <svg class="w-4 h-4 mr-2 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                                                     </svg>
-                                                    Update Internship Completion Details
+                                                    Mettre à jour les détails de fin de stage
                                                 </h4>
-                                                <p class="text-xs text-gray-500">Update the final stage form and report submission dates along with evaluation</p>
+                                                <p class="text-xs text-gray-500">Mettre à jour le formulaire de l'étape finale et les dates de soumission du rapport ainsi que l'évaluation</p>
                                             </div>
 
                                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                                                 <!-- Date Fiche Fin Stage -->
                                                 <div>
                                                     <label for="date_fiche_fin_stage_{{ $Internship->id }}" class="block text-xs font-medium text-gray-700 mb-1">
-                                                        Final Stage Form Date
+                                                        Date du formulaire de l'étape finale
                                                     </label>
                                                     <input type="date" 
                                                            name="date_fiche_fin_stage" 
@@ -305,7 +302,7 @@
                                                 <!-- Date Depot Rapport Stage -->
                                                 <div>
                                                     <label for="date_depot_rapport_stage_{{ $Internship->id }}" class="block text-xs font-medium text-gray-700 mb-1">
-                                                        Report Submission Date
+                                                        Date de soumission du rapport
                                                     </label>
                                                     <input type="date" 
                                                            name="date_depot_rapport_stage" 
@@ -317,14 +314,14 @@
                                                 <!-- evaluation -->
                                                 <div class="col-span-2">
                                                     <label for="evaluation_{{ $Internship->id }}" class="block text-xs font-medium text-gray-700 mb-1">
-                                                        Evaluation
+                                                        évaluation
                                                     </label>
                                                     <textarea name="evaluation" 
                                                               id="evaluation_{{ $Internship->id }}" 
                                                               class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-                                                              placeholder="Enter evaluation notes, feedback, or assessment..."
+                                                              placeholder="Entrer des notes d'évaluation, des commentaires ou une évaluation..."
                                                               rows="4">{{ $Internship->evaluation ?? '' }}</textarea>
-                                                    <p class="mt-1 text-xs text-gray-500">Provide detailed evaluation of the intern's performance during the internship.</p>
+                                                    <p class="mt-1 text-xs text-gray-500">Fournir une évaluation détaillée de la performance du stagiaire pendant le stage.</p>
                                                 </div>
                                             </div>
                                             
@@ -335,13 +332,13 @@
                                                     <svg class="w-3 h-3 mr-1 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                                                     </svg>
-                                                    Cancel
+                                                    annuler
                                                 </button>
                                                 <button type="submit" class="px-3 py-1 text-xs font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-1">
                                                     <svg class="w-3 h-3 mr-1 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                                     </svg>
-                                                    Update Details
+                                                    mettre à jour les détails
                                                 </button>
                                             </div>
                                         </div>

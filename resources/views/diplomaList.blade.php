@@ -6,9 +6,9 @@
         
         {{-- Header --}}
         <header class="mb-8">
-            <h1 class="text-3xl font-bold tracking-tight text-gray-900 dark:text-white">Diploma Management</h1>
+            <h1 class="text-3xl font-bold tracking-tight text-gray-900 dark:text-white">Gestion de diplôme</h1>
             <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                A central place to add, edit, and delete all diplomas.
+                Un endroit central pour ajouter, modifier et supprimer tous les diplômes.
             </p>
         </header>
 
@@ -29,7 +29,7 @@
                         <table class="w-full text-left">
                             <thead class="bg-gray-50 dark:bg-gray-900/50">
                                 <tr>
-                                    <th class="px-6 py-3 text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Name</th>
+                                    <th class="px-6 py-3 text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Nome</th>
                                     <th class="px-6 py-3 text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider text-right">Actions</th>
                                 </tr>
                             </thead>
@@ -54,13 +54,13 @@
                                             <a href="#" class="edit-btn font-semibold text-indigo-600 hover:text-indigo-800 dark:text-indigo-400 dark:hover:text-indigo-300 transition-colors"
                                                 data-id="{{ $diploma->id }}"
                                                 data-name="{{ $diploma->name }}">
-                                                Edit
+                                                modifier
                                             </a>
                                             <form action="{{ route('deleteDiplom',$diploma->id) }}" method="POST" class="inline" onsubmit="return confirm('Are you sure you want to delete this diploma?');">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="font-semibold text-red-600 hover:text-red-800 dark:text-red-500 dark:hover:text-red-400 transition-colors">
-                                                    Delete
+                                                    supprimer
                                                 </button>
                                             </form>
                                             <!-- Inline Edit Form Row (Hidden by default) -->
@@ -75,14 +75,14 @@
                                                                     <svg class="w-4 h-4 mr-2 text-indigo-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                                                                         <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 3.75V16.5L12 14.25 7.5 16.5V3.75m9 0H18A2.25 2.25 0 0 1 20.25 6v12A2.25 2.25 0 0 1 18 20.25H6A2.25 2.25 0 0 1 3.75 18V6A2.25 2.25 0 0 1 6 3.75h1.5m9 0h-9" />
                                                                     </svg>
-                                                                    Update the name of the Diploma
+                                                                    Mettre à jour le nom du diplôme
                                                                 </h4>
                                                             </div>
 
                                                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                                                                     <div>
                                                                     <label for="name" class="block text-xs font-medium text-gray-700 mb-1">
-                                                                        Final Stage Form Date
+                                                                        Nome
                                                                     </label>
                                                                     <input type="text" 
                                                                         name="name" 
@@ -97,13 +97,13 @@
                                                                     <svg class="w-3 h-3 mr-1 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                                                                     </svg>
-                                                                    Cancel
+                                                                    annuler
                                                                 </button>
                                                                 <button type="submit" class="px-3 py-1 text-xs font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-1">
                                                                     <svg class="w-3 h-3 mr-1 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                                                     </svg>
-                                                                    Update Dates
+                                                                    Mettre à jour le nom
                                                                 </button>
                                                             </div>
                                                         </div>
@@ -113,12 +113,6 @@
                                         </td>
                                     </tr>
                                 @empty
-                                    <tr>
-                                        <td colspan="2" class="text-center py-12 text-gray-500 dark:text-gray-400">
-                                            <span class="block text-lg">No diplomas found.</span>
-                                            <span class="text-sm">Why not add one now?</span>
-                                        </td>
-                                    </tr>
                                 @endforelse
                             </tbody>
                         </table>
@@ -138,19 +132,19 @@
                 <div class="bg-white dark:bg-gray-800 shadow-lg rounded-xl p-6 sticky top-8">
                     <div class="flex justify-between items-center mb-4">
                         <h2 class="text-xl font-bold text-gray-900 dark:text-white">
-                            Add a New Diploma
+                            Ajouter un nouveau diplôme
                         </h2>
                     </div>
                     {{-- Add Form --}}
                     <form action="{{ route('storeDiploma') }}" method="POST" class="space-y-6">
                         @csrf
                         <div>
-                            <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Diploma Name</label>
+                            <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Nom du diplôme</label>
                             <input type="text" name="name" style="border: 1px solid #9c9c9c;!important" class="editInput mt-1 block w-full dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg px-4 py-2" required>
                         </div>
                         <div>
                             <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg">
-                                Add Diploma
+                                Ajouter un diplôme
                             </button>
                         </div>
                     </form>

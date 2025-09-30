@@ -7,7 +7,7 @@
             <div class="mb-8 flex justify-between items-start">
                 <div>
                     <h1 class="text-3xl font-bold text-gray-900 dark:text-white">Demande Details</h1>
-                    <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">Complete information about the internship request</p>
+                    <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">Complétez les informations sur la demande de stage</p>
                 </div>
                 <div class="flex space-x-3">
                     @if($demande->status === 'pending')
@@ -15,7 +15,7 @@
                             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                             </svg>
-                            Approve
+                            approuver
                         </button>
                         
                         <form action="{{ route('updateDemande', $demande->id) }}" method="POST"  enctype="multipart/form-data">
@@ -26,7 +26,7 @@
                                 <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                                 </svg>
-                                Reject
+                                rejeter
                             </button>
                         </form>
                     @endif
@@ -34,7 +34,7 @@
                         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
                         </svg>
-                        Edit
+                        modifier
                     </a>
                 </div>
             </div>
@@ -49,13 +49,13 @@
                                 <svg class="w-5 h-5 mr-2 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                                 </svg>
-                                Personal Information
+                                information personnelle
                             </h2>
                         </div>
                         <div class="px-6 py-6">
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                                 <div>
-                                    <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Full Name</p>
+                                    <p class="text-sm font-medium text-gray-500 dark:text-gray-400">nom complet</p>
                                     <p class="text-lg text-gray-900 dark:text-gray-100 font-medium">{{ $demande->person->fullname ?? 'N/A' }}</p>
                                 </div>
                                 <div>
@@ -63,7 +63,7 @@
                                     <p class="text-sm text-gray-900 dark:text-gray-100">{{ $demande->person->email ?? 'N/A' }}</p>
                                 </div>
                                 <div>
-                                    <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Phone</p>
+                                    <p class="text-sm font-medium text-gray-500 dark:text-gray-400">téléphone</p>
                                     <p class="text-sm text-gray-900 dark:text-gray-100">{{ $demande->person->phone ?? 'N/A' }}</p>
                                 </div>
                                 <div>
@@ -89,7 +89,11 @@
                                 @elseif($demande->status === 'expired') bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-300
                                 @else bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300
                                 @endif">
-                                {{ ucfirst($demande->status) }}
+                                @if($demande->status == 'approved') approuvé
+                                @elseif($demande->status == 'pending') en attente
+                                @elseif($demande->status == 'rejected') rejeté
+                                @elseif($demande->status == 'expired') expiré
+                                @endif
                             </span>
                         </div>
                         <div class="px-6 py-6">
@@ -101,7 +105,7 @@
                                     </span>
                                 </div>
                                 <div>
-                                    <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Start Date</p>
+                                    <p class="text-sm font-medium text-gray-500 dark:text-gray-400">date de début</p>
                                     @if($demande->start_date != null)
                                         <p class="text-lg text-gray-900 dark:text-gray-100 font-medium">
                                             {{ \Carbon\Carbon::parse($demande->start_date)->format('M d, Y') }}
@@ -111,7 +115,7 @@
                                     @endif
                                 </div>
                                 <div>
-                                    <p class="text-sm font-medium text-gray-500 dark:text-gray-400">End Date</p>
+                                    <p class="text-sm font-medium text-gray-500 dark:text-gray-400">date de fin</p>
                                     @if($demande->end_date != null)
                                         <p class="text-lg text-gray-900 dark:text-gray-100 font-medium">
                                             {{ \Carbon\Carbon::parse($demande->end_date)->format('M d, Y') }}
@@ -123,10 +127,10 @@
                                 </div>
                             </div>
                             <div class="mt-6">
-                                <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Duration</p>
+                                <p class="text-sm font-medium text-gray-500 dark:text-gray-400">durée</p>
                                 <p class="text-sm text-gray-900 dark:text-gray-100">
                                     @if($demande->start_date != null && $demande->end_date != null)
-                                        {{ \Carbon\Carbon::parse($demande->start_date)->diffInDays(\Carbon\Carbon::parse($demande->end_date)) }} days
+                                        {{ \Carbon\Carbon::parse($demande->start_date)->diffInDays(\Carbon\Carbon::parse($demande->end_date)) }} jours
                                         ({{ \Carbon\Carbon::parse($demande->start_date)->diffForHumans(\Carbon\Carbon::parse($demande->end_date), true) }})
                                     @else
                                         _
@@ -151,21 +155,21 @@
                                 <svg class="w-5 h-5 mr-2 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
                                 </svg>
-                                Academic Information
+                                information académique
                             </h2>
                         </div>
                         <div class="px-6 py-6">
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                                 <div>
-                                    <p class="text-sm font-medium text-gray-500 dark:text-gray-400">University</p>
+                                    <p class="text-sm font-medium text-gray-500 dark:text-gray-400">université</p>
                                     <p class="text-lg text-gray-900 dark:text-gray-100 font-medium">{{ $demande->university->name ?? 'N/A' }}</p>
                                 </div>
                                 <div>
-                                    <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Diploma</p>
+                                    <p class="text-sm font-medium text-gray-500 dark:text-gray-400">diplôme</p>
                                     <p class="text-lg text-gray-900 dark:text-gray-100 font-medium">{{ $demande->diplome->name ?? 'N/A' }}</p>
                                 </div>
                                 <div>
-                                    <p class="text-sm font-medium text-gray-500 dark:text-gray-400">University City</p>
+                                    <p class="text-sm font-medium text-gray-500 dark:text-gray-400">academic city</p>
                                     <p class="text-sm text-gray-900 dark:text-gray-100">{{ $demande->university->city ?? 'N/A' }}</p>
                                 </div>
                             </div>
@@ -190,7 +194,7 @@
  
                                     <div class="ml-3">
                                         <p class="text-sm font-medium text-gray-900 dark:text-gray-100">CV.pdf</p>
-                                        <p class="text-xs text-gray-500 dark:text-gray-400">PDF Document</p>
+                                        <p class="text-xs text-gray-500 dark:text-gray-400">Document PDF</p>
                                     </div>
                                 </div>
                                 <a href="{{ route('demande.downloadCV', $demande->id) }}?v={{ $demande->updated_at->timestamp }}" 
@@ -205,7 +209,7 @@
                                 <svg class="w-12 h-12 mx-auto text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                                 </svg>
-                                <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">No CV uploaded</p>
+                                <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">Pas de CV téléchargé</p>
                             </div>
                             @endif
                             @if($demande->cv)
@@ -216,7 +220,7 @@
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                   d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
                                         </svg>
-                                        View Current CV
+                                        Afficher le CV actuel
                                     </a>
                                 </div>
                             @endif
@@ -226,31 +230,31 @@
                     <!-- Quick Stats -->
                     <div class="bg-white dark:bg-gray-800 shadow-xl rounded-xl overflow-hidden">
                         <div class="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
-                            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Quick Stats</h3>
+                            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">statistiques rapides</h3>
                         </div>
                         <div class="px-6 py-4 space-y-4">
                             <div class="flex justify-between">
-                                <span class="text-sm text-gray-500 dark:text-gray-400">Days until start:</span>
+                                <span class="text-sm text-gray-500 dark:text-gray-400">Jours jusqu'au début :</span>
                                 <span class="text-sm font-medium text-gray-900 dark:text-gray-100">
                                     @if(\Carbon\Carbon::parse($demande->start_date)->isFuture())
-                                        {{ \Carbon\Carbon::now()->diffInDays(\Carbon\Carbon::parse($demande->start_date)) }} days
+                                        {{ \Carbon\Carbon::now()->diffInDays(\Carbon\Carbon::parse($demande->start_date)) }} jours
                                     @else
-                                        Started
+                                        démarré
                                     @endif
                                 </span>
                             </div>
                             <div class="flex justify-between">
-                                <span class="text-sm text-gray-500 dark:text-gray-400">Days until end:</span>
+                                <span class="text-sm text-gray-500 dark:text-gray-400">Jours jusqu'à la fin :</span>
                                 <span class="text-sm font-medium text-gray-900 dark:text-gray-100">
                                 @if(\Carbon\Carbon::parse($demande->end_date)->isFuture())
-                                    {{ round(\Carbon\Carbon::now()->diffInDays(\Carbon\Carbon::parse($demande->end_date))) }} days
+                                    {{ round(\Carbon\Carbon::now()->diffInDays(\Carbon\Carbon::parse($demande->end_date))) }} jours
                                 @else
-                                    Ended
+                                    terminé
                                 @endif
                             </span>
                             </div>
                             <div class="flex justify-between">
-                                <span class="text-sm text-gray-500 dark:text-gray-400">Time since request:</span>
+                                <span class="text-sm text-gray-500 dark:text-gray-400">Temps depuis la demande :</span>
                                 <span class="text-sm font-medium text-gray-900 dark:text-gray-100">
                                     @if($demande->created_at != null)
                                         {{ $demande->created_at->diffForHumans() }}
@@ -265,7 +269,7 @@
                     <!-- Activity Timeline -->
                     <div class="bg-white dark:bg-gray-800 shadow-xl rounded-xl overflow-hidden">
                         <div class="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
-                            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Activity</h3>
+                            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Activité</h3>
                         </div>
                         <div class="px-6 py-4">
                             <div class="flow-root">
@@ -283,7 +287,7 @@
                                                 </div>
                                                 <div class="min-w-0 flex-1">
                                                     <div>
-                                                        <p class="text-sm text-gray-900 dark:text-gray-100">Demande created</p>
+                                                        <p class="text-sm text-gray-900 dark:text-gray-100">Demande créée</p>
                                                         @if($demande->created_at != null)
                                                             <p class="text-xs text-gray-500 dark:text-gray-400">{{ $demande->created_at->format('M d, Y \a\t H:i') }}</p>
                                                         @else
@@ -308,7 +312,7 @@
                                                 </div>
                                                 <div class="min-w-0 flex-1">
                                                     <div>
-                                                        <p class="text-sm text-gray-900 dark:text-gray-100">Last updated</p>
+                                                        <p class="text-sm text-gray-900 dark:text-gray-100">dernière modification</p>
                                                         @if($demande->updated_at != null)
                                                             <p class="text-xs text-gray-500 dark:text-gray-400">{{ $demande->updated_at->format('M d, Y \a\t H:i') }}</p>
                                                         @else
@@ -334,7 +338,7 @@
             <div class="p-6">
                 <!-- Modal Header -->
                 <div class="flex items-center justify-between mb-6">
-                    <h3 class="text-xl font-semibold text-gray-900">Approve Demande</h3>
+                    <h3 class="text-xl font-semibold text-gray-900">Approuver la demande</h3>
                     <button onclick="closeApprovalModal()" class="text-gray-400 hover:text-gray-600 transition-colors duration-200 p-1 rounded-full hover:bg-gray-100">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -350,7 +354,7 @@
                     <div class="space-y-5">
                         <!-- Full Name (Read-only) -->
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">nom complet</label>
                             <input type="text" id="modal_fullname" 
                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg bg-gray-50 text-gray-600 cursor-not-allowed focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors" 
                                    readonly>
@@ -359,7 +363,7 @@
                         <!-- Start Date -->
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">
-                                Internship Start Date <span class="text-red-500">*</span>
+                                date de début du stage <span class="text-red-500">*</span>
                             </label>
                             <input type="date" id="modal_start_date" name="internship_start_date" 
                                 class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors" 
@@ -369,7 +373,7 @@
                         <!-- End Date -->
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">
-                                Internship End Date <span class="text-red-500">*</span>
+                                Date de fin du stage <span class="text-red-500">*</span>
                             </label>
                             <input type="date" id="modal_end_date" name="internship_end_date" 
                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors" 
@@ -378,7 +382,7 @@
 
                         <!-- Status (Auto-calculated) -->
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Internship Status</label>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Statut du stage</label>
                             <input type="text" id="modal_status" name="internship_status" 
                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg bg-gray-50 text-gray-600 cursor-not-allowed focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors" 
                                    readonly>
@@ -387,12 +391,12 @@
                         <!-- Supervisor Selection -->
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">
-                                Supervisor <span class="text-red-500">*</span>
+                                superviseur <span class="text-red-500">*</span>
                             </label>
                             <select name="supervisor_id" 
                                     class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-white" 
                                     required>
-                                <option value="">Select Supervisor</option>
+                                <option value="">Sélectionner le superviseur</option>
                                 @if(isset($users))
                                     @foreach($users as $user)
                                         <option value="{{ $user->id }}">{{ $user->name }}</option>
@@ -410,11 +414,11 @@
                     <div class="flex items-center justify-end space-x-3 mt-8 pt-4 border-t border-gray-200">
                         <button type="button" onclick="closeApprovalModal()" 
                                 class="px-5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-colors">
-                            Cancel
+                            annuler
                         </button>
                         <button type="submit" 
                                 class="px-5 py-2 text-sm font-medium text-white bg-green-600 border border-transparent rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-colors">
-                            Approve & Create Internship
+                            Approuver et créer un stage
                         </button>
                     </div>
                 </form>

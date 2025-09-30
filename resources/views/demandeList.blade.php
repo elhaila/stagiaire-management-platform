@@ -19,44 +19,44 @@
 
                 <!-- Type Filter -->
                 <select id="type-filter" class="border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <option value="">All Types</option>
+                    <option value="">toute sorte</option>
                     <option value="pfe">PFE</option>
                     <option value="stage">Stage</option>
                 </select>
 
                 <!-- Status Filter -->
                 <select id="status-filter" class="border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <option value="">All Statuses</option>
-                    <option value="pending">Pending</option>
-                    <option value="expired">Expired</option>
-                    <option value="rejected">Rejected</option>
+                    <option value="">tous les statuts</option>
+                    <option value="pending">en attente</option>
+                    <option value="expired">expiré</option>
+                    <option value="rejected">rejeté</option>
                 </select>
 
                 <!-- Sort Options -->
                 <select id="sort-select" class="border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <option value="name-asc">Name A-Z</option>
-                    <option value="name-desc">Name Z-A</option>
-                    <option value="date-newest">Newest First</option>
-                    <option value="date-oldest">Oldest First</option>
-                    <option value="start-earliest">Start Date (Earliest)</option>
-                    <option value="start-latest">Start Date (Latest)</option>
-                    <option value="status-priority" selected>Status Priority</option>
+                    <option value="name-asc">Nome A-Z</option>
+                    <option value="name-desc">Nome Z-A</option>
+                    <option value="date-newest">plus récent en premier</option>
+                    <option value="date-oldest">plus ancien en premier</option>
+                    <option value="start-earliest">Date de début (la plus proche)</option>
+                    <option value="start-latest">Date de début (Dernière)</option>
+                    <option value="status-priority" selected>Statut Priorité</option>
                 </select>
 
                 <!-- Clear Search -->
                 <button id="clear-search" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 transition-colors duration-200">
-                    Clear
+                    Clair
                 </button>
             </div>
             
             <!-- Search Statistics -->
             <div class="mt-3 flex items-center justify-between text-sm text-gray-600">
-                <span id="search-stats">Showing {{ $demandes->where('status', '!=', 'accepted')->count() }} of {{ $demandes->where('status', '!=', 'accepted')->count() }} demandes</span>
+                <span id="search-stats">Affichage de {{ $demandes->where('status', '!=', 'accepted')->count() }} personnes sur {{ $demandes->where('status', '!=', 'accepted')->count() }} demandes</span>
                 {{-- <span id="search-time" class="hidden">Search completed in <span id="search-duration">0</span>ms</span> --}}
             </div>
         </div>
 
-        <h2 class="text-lg font-semibold mb-4 inline-block">Demande List</h2>
+        <h2 class="text-lg font-semibold mb-4 inline-block">List des demande</h2>
 
         <!-- Results Container -->
         <div class="bg-white shadow rounded-lg overflow-auto">
@@ -66,36 +66,36 @@
                         <tr>
                             <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase cursor-pointer hover:bg-gray-100" 
                                 onclick="sortTable('name')">
-                                Full Name
+                                nom complet
                                 <svg class="w-3 h-3 inline ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path>
                                 </svg>
                             </th>
                             <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase cursor-pointer hover:bg-gray-100"
                                 onclick="sortTable('university')">
-                                University
+                                université
                                 <svg class="w-3 h-3 inline ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path>
                                 </svg>
                             </th>
-                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Diploma</th>
+                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">diplôme</th>
                             <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Type</th>
                             <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase cursor-pointer hover:bg-gray-100"
                                 onclick="sortTable('status')">
-                                Status
+                                statut
                                 <svg class="w-3 h-3 inline ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path>
                                 </svg>
                             </th>
                             <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase cursor-pointer hover:bg-gray-100"
                                 onclick="sortTable('start')">
-                                Start Date
+                                date de début
                                 <svg class="w-3 h-3 inline ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path>
                                 </svg>
                             </th>
-                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">End Date</th>
-                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Actions</th>
+                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">date de fin</th>
+                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">actions</th>
                         </tr>
                     </thead>
                     
@@ -157,17 +157,19 @@
                                         @if($demande->status === 'pending')
                                             <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
                                                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
-                                            </svg>
+                                            </svg> 
+                                            <span>pendant</span>
                                         @elseif($demande->status === 'expired')
                                             <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
                                                 <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
                                             </svg>
+                                            <span>expiré</span>
                                         @elseif($demande->status === 'rejected')
                                             <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
                                                 <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
                                             </svg>
+                                            <span>rejeté</span>
                                         @endif
-                                        {{ ucfirst($demande->status) }}
                                     </span>
                                 </td>
 
@@ -223,7 +225,7 @@
                                                         <button type="submit" 
                                                                 class="text-red-600 hover:text-red-800 transition-colors duration-150" 
                                                                 title="Reject Demande"
-                                                                onclick="return confirm('Are you sure you want to reject this demande?')">
+                                                                onclick="return confirm('Êtes-vous sûr de vouloir rejeter cette demande ?')">
                                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                                                                 <path stroke-linecap="round" stroke-linejoin="round" d="M18.364 18.364A9 9 0 0 0 5.636 5.636m12.728 12.728A9 9 0 0 1 5.636 5.636m12.728 12.728L5.636 5.636" />
                                                             </svg>
@@ -246,20 +248,19 @@
                 <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                 </svg>
-                <h3 class="mt-2 text-sm font-medium text-gray-900">No demandes found</h3>
-                <p class="mt-1 text-sm text-gray-500">Try adjusting your search terms or filters.</p>
+                <h3 class="mt-2 text-sm font-medium text-gray-900">Aucune demande trouvée</h3>
+                <p class="mt-1 text-sm text-gray-500">Essayez d'ajuster vos termes de recherche ou vos filtres.</p>
             </div>
         </div>
     </div>
 
-    <!-- Keep your existing approval modal here -->
     <!-- Approval Modal -->
     <div id="approvalModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-start justify-center z-50 pt-8">
         <div class="bg-white rounded-lg shadow-xl max-w-md w-full max-h-[90vh] overflow-y-auto transform transition-all duration-300 scale-95 opacity-0" id="modalContent">
             <div class="p-6">
                 <!-- Modal Header -->
                 <div class="flex items-center justify-between mb-6">
-                    <h3 class="text-xl font-semibold text-gray-900">Approve Demande</h3>
+                    <h3 class="text-xl font-semibold text-gray-900">Approuver la demande</h3>
                     <button onclick="closeApprovalModal()" class="text-gray-400 hover:text-gray-600 transition-colors duration-200 p-1 rounded-full hover:bg-gray-100">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -275,14 +276,14 @@
                     <div class="space-y-5">
                         <!-- Full Name (Read-only) -->
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">nom complet</label>
                             <input type="text" id="modal_fullname" 
                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg bg-gray-50 text-gray-600 cursor-not-allowed focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors" 
                                    readonly>
                         </div>
                         {{-- Project name --}}
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Project Name</label>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">nom du projet</label>
                             <input type="text" id="Project" name="Project"  
                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg text-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors" >
                         </div>
@@ -290,7 +291,7 @@
                         <!-- Start Date -->
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">
-                                Internship Start Date <span class="text-red-500">*</span>
+                                date de début du stage <span class="text-red-500">*</span>
                             </label>
                             <input type="date" id="modal_start_date" name="internship_start_date" 
                                 class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors" 
@@ -300,7 +301,7 @@
                         <!-- End Date -->
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">
-                                Internship End Date <span class="text-red-500">*</span>
+                                Date de fin du stage <span class="text-red-500">*</span>
                             </label>
                             <input type="date" id="modal_end_date" name="internship_end_date" 
                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors" 
@@ -309,7 +310,7 @@
 
                         <!-- Status (Auto-calculated) -->
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Internship Status</label>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Statut du stage</label>
                             <input type="text" id="modal_status" name="internship_status" 
                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg bg-gray-50 text-gray-600 cursor-not-allowed focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors" 
                                    readonly>
@@ -318,12 +319,12 @@
                         <!-- Supervisor Selection -->
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">
-                                Supervisor <span class="text-red-500">*</span>
+                                superviseur <span class="text-red-500">*</span>
                             </label>
                             <select name="supervisor_id" 
                                     class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-white" 
                                     required>
-                                <option value="">Select Supervisor</option>
+                                <option value="">Sélectionner le superviseur</option>
                                 @if(isset($supervisors))
                                     @foreach($supervisors as $supervisor)
                                         <option value="{{ $supervisor->id }}">{{ $supervisor->name }}</option>
@@ -340,11 +341,11 @@
                     <div class="flex items-center justify-end space-x-3 mt-8 pt-4 border-t border-gray-200">
                         <button type="button" onclick="closeApprovalModal()" 
                                 class="px-5 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-colors">
-                            Cancel
+                            annuler
                         </button>
                         <button type="submit" 
                                 class="px-5 py-2 text-sm font-medium text-white bg-green-600 border border-transparent rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-colors">
-                            Approve & Create Internship
+                            Approuver et créer un stage
                         </button>
                     </div>
                 </form>

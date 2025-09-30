@@ -10,15 +10,19 @@
             <div class="text-2xl font-bold">{{ $totalInternships }}</div>
         </div>
         <div class="flex-1 min-w-[200px] bg-white shadow rounded-lg p-4">
-            <div class="text-gray-500 text-sm">Active Internships</div>
+            <div class="text-gray-500 text-sm">Nombre total de stages</div>
+            <div class="text-2xl font-bold">{{ $totalInternships }}</div>
+        </div>
+        <div class="flex-1 min-w-[200px] bg-white shadow rounded-lg p-4">
+            <div class="text-gray-500 text-sm">Stages actifs</div>
             <div class="text-2xl font-bold text-green-600">{{ $activeInternships }}</div>
         </div>
         <div class="flex-1 min-w-[200px] bg-white shadow rounded-lg p-4">
-            <div class="text-gray-500 text-sm">Pending Internships</div>
+            <div class="text-gray-500 text-sm">Stages en attente</div>
             <div class="text-2xl font-bold text-yellow-600">{{ $pendingInternships }}</div>
         </div>
         <div class="flex-1 min-w-[200px] bg-white shadow rounded-lg p-4">
-            <div class="text-gray-500 text-sm">Finished Internships</div>
+            <div class="text-gray-500 text-sm">Stages terminés</div>
             <div class="text-2xl font-bold text-blue-600">{{ $totalFinishedInternships }}</div>
         </div>
     </div>
@@ -26,19 +30,19 @@
     <!-- Recent Internships -->
     <div class="bg-white shadow rounded-lg p-4 overflow-x-auto">
         <div class="flex justify-between items-center mb-4">
-            <h2 class="text-lg font-semibold">Recent Internships</h2>
-            <a href="{{ route('internshipList') }}" class="text-blue-600 hover:underline text-sm">View All</a>
+            <h2 class="text-lg font-semibold">stages récents</h2>
+            <a href="{{ route('internshipList') }}" class="text-blue-600 hover:underline text-sm">Tout afficher</a>
         </div>
         
         <table class="min-w-full divide-y divide-gray-200">
             <thead class="bg-gray-50">
                 <tr>
-                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Intern</th>
+                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">stagiaire</th>
                     <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Supervisor</th>
                     <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Type</th>
-                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
-                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Start Date</th>
-                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">End Date</th>
+                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Statut</th>
+                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Date de debut</th>
+                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Date de fin</th>
                 </tr>
             </thead>
             <tbody class="divide-y divide-gray-200">
@@ -111,17 +115,17 @@
     <div class="bg-white shadow rounded-lg p-4 overflow-x-auto">
         <div class="flex justify-between items-center mb-4">
             <h2 class="text-lg font-semibold">Recent Absences</h2>
-            <a href="{{route('absenceList')}}" class="text-blue-600 hover:underline text-sm">View All</a>
+            <a href="{{route('absenceList')}}" class="text-blue-600 hover:underline text-sm">Tout afficher</a>
         </div>
         
         <table class="min-w-full divide-y divide-gray-200">
             <thead class="bg-gray-50">
                 <tr>
-                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Intern</th>
+                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">stagiaire</th>
                     <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Date</th>
-                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Reason</th>
-                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
-                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Justification</th>
+                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">raison</th>
+                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Statut</th>
+                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">justification</th>
                 </tr>
             </thead>
             <tbody class="divide-y divide-gray-200">

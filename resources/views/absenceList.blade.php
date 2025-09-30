@@ -20,45 +20,45 @@
 
                 <!-- Type Filter -->
                 <select id="type-filter" class="border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <option value="">All Types</option>
+                    <option value="">toute sorte</option>
                     <option value="pfe">PFE</option>
                     <option value="stage">Stage</option>
                 </select>
 
                 <!-- Status Filter -->
                 <select id="status-filter" class="border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <option value="">All Statuses</option>
-                    <option value="justified">Justified</option>
-                    <option value="unjustified">Unjustified</option>
+                    <option value="">tous les statuts</option>
+                    <option value="justified">justifié</option>
+                    <option value="unjustified">injustifié</option>
                 </select>
 
                 <!-- Date Range Filter -->
                 <select id="date-filter" class="border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <option value="">All Dates</option>
-                    <option value="today">Today</option>
-                    <option value="week">This Week</option>
-                    <option value="month">This Month</option>
-                    <option value="last-month">Last Month</option>
+                    <option value="">toutes les dates</option>
+                    <option value="today">aujourd'hui</option>
+                    <option value="week">cette semaine</option>
+                    <option value="month">ce mois</option>
+                    <option value="last-month">mois dernier</option>
                 </select>
 
                 <!-- Sort Options -->
                 <select id="sort-select" class="border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <option value="date-newest">Date (Newest)</option>
-                    <option value="date-oldest">Date (Oldest)</option>
-                    <option value="name-asc">Intern A-Z</option>
-                    <option value="name-desc">Intern Z-A</option>
-                    <option value="status-priority">Status Priority</option>
+                    <option value="date-newest">Date (plus récente)</option>
+                    <option value="date-oldest">Date (les plus anciennes)</option>
+                    <option value="name-asc">Stagiaire A-Z</option>
+                    <option value="name-desc">Stagiaire Z-A</option>
+                    <option value="status-priority">Statut Priorité</option>
                 </select>
 
                 <!-- Clear Search -->
                 <button id="clear-search" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 transition-colors duration-200">
-                    Clear
+                    effacer
                 </button>
             </div>
             
             <!-- Search Statistics -->
             <div class="mt-3 flex items-center justify-between text-sm text-gray-600">
-                <span id="search-stats">Showing {{ $absences->count() }} of {{ $absences->count() }} absences</span>
+                <span id="search-stats">Affichage de {{ $absences->count() }} personnes sur {{ $absences->count() }}</span>
                 {{-- <span id="search-time" class="hidden">Search completed in <span id="search-duration">0</span>ms</span> --}}
             </div>
         </div>
@@ -71,14 +71,14 @@
                         <tr>
                             <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase cursor-pointer hover:bg-gray-100" 
                                 onclick="sortTable('intern')">
-                                Intern
+                                stagiaire
                                 <svg class="w-3 h-3 inline ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path>
                                 </svg>
                             </th>
                             <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase cursor-pointer hover:bg-gray-100"
                                 onclick="sortTable('supervisor')">
-                                Supervisor
+                                superviseur
                                 <svg class="w-3 h-3 inline ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path>
                                 </svg>
@@ -92,12 +92,12 @@
                             </th>
                             <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase cursor-pointer hover:bg-gray-100"
                                 onclick="sortTable('status')">
-                                Status
+                                statut
                                 <svg class="w-3 h-3 inline ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path>
                                 </svg>
                             </th>
-                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Reason</th>
+                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">raison</th>
                             <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Justification</th>
                             <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Actions</th>
                         </tr>
@@ -147,7 +147,7 @@
                                                 <span class="supervisor-highlight">{{ $absence->internship->user->name }}</span>
                                             </div>
                                         @else
-                                            <span class="text-gray-400">No supervisor</span>
+                                            <span class="text-gray-400">aucun superviseur</span>
                                         @endif
                                     </div>
                                 </td>
@@ -156,7 +156,7 @@
                                 <!-- Date -->
                                 <td class="px-4 py-2 text-sm text-gray-700">
                                     @if($absence->end_date != null )
-                                        {{ \Carbon\Carbon::parse($absence->start_date)->format('M d') }} <strong>to</strong>
+                                        {{ \Carbon\Carbon::parse($absence->start_date)->format('M d') }} <strong>à</strong>
                                         {{ \Carbon\Carbon::parse($absence->end_date)->format('M d') }}
                                     @elseif($absence->start_date != null)
                                         {{ \Carbon\Carbon::parse($absence->start_date)->format('M d') }}
@@ -173,13 +173,12 @@
                                         @if($absence->status === 'justified')
                                             <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
                                                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                                            </svg>
+                                            </svg> justifié
                                         @else
                                             <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
                                                 <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-                                            </svg>
-                                        @endif
-                                        {{ ucfirst($absence->status) }}
+                                            </svg> injustifié
+                                        @endif 
                                     </span>
                                 </td>
 
@@ -192,7 +191,7 @@
                                             </p>
                                         </div>
                                     @else
-                                        <span class="text-gray-400 italic">No reason provided</span>
+                                        <span class="text-gray-400 italic">Aucune raison fournie</span>
                                     @endif
                                 </td>
 
@@ -205,10 +204,10 @@
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                     d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
                                             </svg>
-                                            <span class="text-xs">View Document</span>
+                                            <span class="text-xs">Afficher le document</span>
                                         </a>
                                     @else
-                                        <span class="text-gray-400 italic">No document</span>
+                                        <span class="text-gray-400 italic">aucun document</span>
                                     @endif
                                 </td>
 
@@ -240,7 +239,7 @@
                                     <svg class="mx-auto h-12 w-12 text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                                     </svg>
-                                    No absences found
+                                    Aucune absence trouvée
                                 </td>
                             </tr>
                         @endforelse
@@ -253,8 +252,8 @@
                 <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                 </svg>
-                <h3 class="mt-2 text-sm font-medium text-gray-900">No absences found</h3>
-                <p class="mt-1 text-sm text-gray-500">Try adjusting your search terms or filters.</p>
+                <h3 class="mt-2 text-sm font-medium text-gray-900">Aucune absence trouvée</h3>
+                <p class="mt-1 text-sm text-gray-500">Essayez d'ajuster vos termes de recherche ou vos filtres.</p>
             </div>
         </div>
     </div>
@@ -264,7 +263,7 @@
         <div class="bg-white rounded-lg shadow-xl max-w-md w-full mx-4 transform transition-all duration-300 scale-95 opacity-0" id="modalContent">
             <div class="p-6">
                 <div class="flex items-center justify-between mb-6">
-                    <h3 class="text-xl font-semibold text-gray-900">Absence Details</h3>
+                    <h3 class="text-xl font-semibold text-gray-900">Détails de l’absence</h3>
                     <button onclick="closeDetailsModal()" class="text-gray-400 hover:text-gray-600 transition-colors duration-200">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -278,7 +277,7 @@
                 
                 <div class="mt-6 flex justify-end">
                     <button onclick="closeDetailsModal()" class="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600 transition-colors duration-200">
-                        Close
+                        fermer
                     </button>
                 </div>
             </div>

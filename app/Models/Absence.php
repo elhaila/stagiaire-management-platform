@@ -13,7 +13,7 @@ class Absence extends Model
     protected $fillable = [
         'internship_id',
         'start_date',
-        'end',
+        'end_date',
         'reason',
         'status',
         'justification',

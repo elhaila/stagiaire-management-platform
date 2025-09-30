@@ -5,7 +5,7 @@
 
     {{-- Main Content Area --}}
     <header class="mb-8">
-        <h1 class="text-3xl font-bold tracking-tight text-gray-900 dark:text-white">University Management</h1>
+        <h1 class="text-3xl font-bold tracking-tight text-gray-900 dark:text-white">gestion universitaire</h1>
     </header>   
 
     <div class="flex flex-col lg:flex-row gap-6">
@@ -15,15 +15,15 @@
 
                 {{-- 🔎 Search Input --}}
                 <div class="p-4 border-b border-gray-200 dark:border-gray-700">
-                    <input type="text" placeholder="Search by name or city..." id="searchInput"
+                    <input type="text" placeholder="Recherche par nom ou ville..." id="searchInput"
                            class="w-full bg-gray-100 dark:bg-gray-700 border-transparent rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:text-white">
                 </div>
 
                 <table class="w-full text-left divide-y divide-gray-200 dark:divide-gray-700">
                     <thead class="bg-gray-50 dark:bg-gray-700">
                         <tr>
-                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Name</th>
-                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">City</th>
+                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Nom</th>
+                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">ville</th>
                         </tr>
                     </thead>
                     <tbody id="universityTable" class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
@@ -49,7 +49,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="2" class="text-center py-4 text-gray-500 dark:text-gray-400">No universities found.</td>
+                                <td colspan="2" class="text-center py-4 text-gray-500 dark:text-gray-400">Aucune université trouvée.</td>
                             </tr>
                         @endforelse
                     </tbody>
@@ -64,11 +64,11 @@
 
         {{-- Add University Form --}}
         <div class="bg-white dark:bg-gray-800 shadow rounded-lg p-4 lg:p-6 w-full lg:w-1/3 h-fit">
-            <h2 class="text-xl font-semibold mb-4 text-gray-800 dark:text-white">Add University</h2>
+            <h2 class="text-xl font-semibold mb-4 text-gray-800 dark:text-white">Ajouter une université</h2>
             <form action="{{ route('storeUniversity') }}" method="POST" class="space-y-4">
                 @csrf
                 <div>
-                    <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Name</label>
+                    <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300">nom</label>
                     <input type="text" name="name" id="name"
                            class="mt-1 block w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 rounded-lg px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
                            required>
@@ -78,11 +78,11 @@
                 </div>
 
                 <div>
-                    <label for="city" class="block text-sm font-medium text-gray-700 dark:text-gray-300">City</label>
+                    <label for="city" class="block text-sm font-medium text-gray-700 dark:text-gray-300">ville</label>
                     <select name="city" id="city"
                             class="mt-1 block w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 rounded-lg px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
                             required>
-                        <option value="">-- Select a city --</option>
+                        <option value="">-- sélectionner une ville --</option>
                         <option value="agadir">Agadir</option>
                         <option value="al Hoceima">Al Hoceima</option>
                         <option value="azrou">Azrou</option>
@@ -121,7 +121,7 @@
                 <div>
                     <button type="submit"
                             class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-4 py-2 rounded-lg transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                        Add University
+                        Ajouter une université
                     </button>
                 </div>
             </form>
@@ -142,7 +142,7 @@
             if (name.includes(filter) || city.includes(filter)) {
                 row.style.display = "";
             } else {
-                row.style.display = "none";
+                row.style.display = "rien";
             }
         });
     });

@@ -9,8 +9,8 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Header -->
             <div class="mb-8">
-                <h1 class="text-3xl font-bold text-gray-900 dark:text-white">Add New superviseur</h1>
-                <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">Create a new superviseur profile .</p>
+                <h1 class="text-3xl font-bold text-gray-900 dark:text-white">Ajouter un nouveau superviseur</h1>
+                <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">Créer un nouveau profil de superviseur.</p>
             </div>
 
             <!-- Form Container -->
@@ -25,18 +25,18 @@
                                 <svg class="w-5 h-5 mr-2 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                                 </svg>
-                                Personal Information
+                                Informations personnelles
                             </h2>
-                            <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Basic contact information and identification details for the person.</p>
+                            <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Coordonnées de base et informations d'identification de la personne.</p>
                         </div>
                         
                         <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
                             <!-- Full Name -->
                             <div class="sm:col-span-1">
                                 <label for="full_name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                                    Full Name <span class="text-red-500">*</span>
+                                    Nom complet <span class="text-red-500">*</span>
                                 </label>
-                                <input type="text" name="full_name" id="full_name" placeholder="Enter full name" value="{{ old('full_name') }}" class="block w-full px-3 py-2 border {{ $errors->has('full_name') ? 'border-red-300 focus:border-red-500 focus:ring-red-500' : 'border-gray-300 focus:border-indigo-500 focus:ring-indigo-500' }} dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 rounded-md shadow-sm focus:outline-none focus:ring-1 transition-colors duration-200" required>
+                                <input type="text" name="full_name" id="full_name" placeholder="Saisir le nom complet" value="{{ old('full_name') }}" class="block w-full px-3 py-2 border {{ $errors->has('full_name') ? 'border-red-300 focus:border-red-500 focus:ring-red-500' : 'border-gray-300 focus:border-indigo-500 focus:ring-indigo-500' }} dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 rounded-md shadow-sm focus:outline-none focus:ring-1 transition-colors duration-200" required>
                                 @error('full_name')
                                     <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
                                 @enderror
@@ -45,7 +45,7 @@
                             <!-- Phone -->
                             <div class="sm:col-span-1">
                                 <label for="phone" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                                    Phone Number <span class="text-red-500">*</span>
+                                    Numéro de téléphone <span class="text-red-500">*</span>
                                 </label>
                                 <div class="relative">
                                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -71,7 +71,7 @@
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"></path>
                                         </svg>
                                     </div>
-                                    <input type="email" name="email" id="email" placeholder="example@domain.com" value="{{ old('email') }}" class="block w-full pl-10 pr-3 py-2 border {{ $errors->has('email') ? 'border-red-300 focus:border-red-500 focus:ring-red-500' : 'border-gray-300 focus:border-indigo-500 focus:ring-indigo-500' }} dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 rounded-md shadow-sm focus:outline-none focus:ring-1 transition-colors duration-200" required>
+                                    <input type="email" name="email" id="email" placeholder="exemple@gmail.com" value="{{ old('email') }}" class="block w-full pl-10 pr-3 py-2 border {{ $errors->has('email') ? 'border-red-300 focus:border-red-500 focus:ring-red-500' : 'border-gray-300 focus:border-indigo-500 focus:ring-indigo-500' }} dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 rounded-md shadow-sm focus:outline-none focus:ring-1 transition-colors duration-200" required>
                                 </div>
                                 @error('email')
                                     <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
@@ -81,7 +81,7 @@
                             <!-- Password -->
                             <div class="sm:col-span-1">
                                 <label for="password" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                                    Password <span class="text-red-500">*</span>
+                                    Mot de passe <span class="text-red-500">*</span>
                                 </label>
                                 <div class="relative">
                                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -99,7 +99,7 @@
                             <!-- confirm password -->
                             <div class="sm:col-span-1">
                                 <label for="password_confirmation" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                                    Confirm Password <span class="text-red-500">*</span>
+                                    Confirmer le mot de passe <span class="text-red-500">*</span>
                                 </label>
                                 <div class="relative">
                                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -126,7 +126,7 @@
                                 <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                                 </svg>
-                                Save User
+                                Enregistrer Superviseur
                             </button>
                         </div>
                     </div>
