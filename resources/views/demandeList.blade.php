@@ -2,14 +2,14 @@
 @section('content')
     <div class="p-6 space-y-6 overflow-auto">
         <!-- Enhanced Search Section -->
-        <div class="bg-white shadow rounded-lg p-4 mt-6">
+        <div class="bg-white shadow rounded-lg p-4 mt-6 dark:bg-gray-800">
             <div class="flex flex-wrap gap-4 items-center">
                 <!-- Real-time Search Input -->
                 <div class="flex-1 min-w-[250px] relative">
                     <input type="text" 
                            id="search-input" 
                            placeholder="Search by name, university, diploma, type..." 
-                           class="w-full border rounded px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                           class="w-full border rounded px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:border-transparent dark:text-white">
                     <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
                         <svg class="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
@@ -18,14 +18,14 @@
                 </div>
 
                 <!-- Type Filter -->
-                <select id="type-filter" class="border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <select id="type-filter" class="border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-800 dark:text-white">
                     <option value="">toute sorte</option>
                     <option value="pfe">PFE</option>
                     <option value="stage">Stage</option>
                 </select>
 
                 <!-- Status Filter -->
-                <select id="status-filter" class="border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <select id="status-filter" class="border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-800 dark:text-white">
                     <option value="">tous les statuts</option>
                     <option value="pending">en attente</option>
                     <option value="expired">expiré</option>
@@ -33,7 +33,7 @@
                 </select>
 
                 <!-- Sort Options -->
-                <select id="sort-select" class="border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <select id="sort-select" class="border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-800 dark:text-white">
                     <option value="name-asc">Nome A-Z</option>
                     <option value="name-desc">Nome Z-A</option>
                     <option value="date-newest">plus récent en premier</option>
@@ -56,53 +56,53 @@
             </div>
         </div>
 
-        <h2 class="text-lg font-semibold mb-4 inline-block">List des demande</h2>
+        <h2 class="text-lg font-semibold mb-4 inline-block dark:text-white">List des demande</h2>
 
         <!-- Results Container -->
-        <div class="bg-white shadow rounded-lg overflow-auto">
+       <div class="bg-white shadow rounded-lg overflow-hidden" style="font-size: small">
             <div class="overflow-x-auto">
-                <table class="min-w-full divide-y divide-gray-200">
-                    <thead class="bg-gray-50">
+                <table class="min-w-full w-full table-fixed divide-y divide-gray-200 dark:divide-gray-700">
+                    <thead class="bg-gray-50 dark:bg-gray-700 ">
                         <tr>
-                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase cursor-pointer hover:bg-gray-100" 
+                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase cursor-pointer dark:text-gray-400" 
                                 onclick="sortTable('name')">
                                 nom complet
                                 <svg class="w-3 h-3 inline ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path>
                                 </svg>
                             </th>
-                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase cursor-pointer hover:bg-gray-100"
+                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase cursor-pointer dark:text-gray-400"
                                 onclick="sortTable('university')">
                                 université
                                 <svg class="w-3 h-3 inline ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path>
                                 </svg>
                             </th>
-                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">diplôme</th>
-                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Type</th>
-                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase cursor-pointer hover:bg-gray-100"
+                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase dark:text-gray-400">diplôme</th>
+                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase dark:text-gray-400">Type</th>
+                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase cursor-pointer dark:text-gray-400"
                                 onclick="sortTable('status')">
                                 statut
                                 <svg class="w-3 h-3 inline ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path>
                                 </svg>
                             </th>
-                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase cursor-pointer hover:bg-gray-100"
+                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase cursor-pointer dark:text-gray-400"
                                 onclick="sortTable('start')">
                                 date de début
                                 <svg class="w-3 h-3 inline ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path>
                                 </svg>
                             </th>
-                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">date de fin</th>
-                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">actions</th>
+                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase dark:text-gray-400">date de fin</th>
+                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase dark:text-gray-400">actions</th>
                         </tr>
                     </thead>
                     
-                    <tbody id="demandes-table-body" class="bg-white divide-y divide-gray-200">
+                    <tbody id="demandes-table-body" class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
                         @foreach ($demandes as $demande)
                             @if($demande->status != 'accepted')
-                            <tr class="demande-row hover:bg-gray-50 transition-colors duration-150" 
+                            <tr class="demande-row  transition-colors duration-150" 
                                 data-name="{{ strtolower($demande->person->fullname ?? '') }}" 
                                 data-university="{{ strtolower($demande->university->name ?? '') }}" 
                                 data-diploma="{{ strtolower($demande->diplome->name ?? '') }}" 
@@ -122,7 +122,7 @@
                                             </div>
                                         </div>
                                         <div class="ml-3">
-                                            <div class="text-gray-900 name-highlight">
+                                            <div class="text-gray-900 name-highlight dark:text-gray-400">
                                                 {{ $demande->person->fullname ?? '—' }}
                                             </div>
                                         </div>
@@ -131,12 +131,12 @@
 
                                 <!-- University -->
                                 <td class="px-4 py-2 text-xs text-gray-700">
-                                    <span class="university-highlight">{{ $demande->university->name ?? '—' }}</span>
+                                    <span class="university-highlight dark:text-gray-400">{{ $demande->university->name ?? '—' }}</span>
                                 </td>
 
                                 <!-- Diploma -->
                                 <td class="px-4 py-2 text-xs text-gray-700">
-                                    <span class="diploma-highlight">{{ $demande->diplome->name ?? '—' }}</span>
+                                    <span class="diploma-highlight dark:text-gray-400">{{ $demande->diplome->name ?? '—' }}</span>
                                 </td>
 
                                 <!-- Type -->
@@ -175,14 +175,14 @@
 
                                 <!-- Start Date -->
                                 <td class="px-4 py-2 text-xs text-gray-700">
-                                    <div class="flex items-center">
+                                    <div class="flex items-center dark:text-gray-400">
                                         {{ $demande->start_date ? \Carbon\Carbon::parse($demande->start_date)->format('M d, Y') : '—' }}
                                     </div>
                                 </td>
 
                                 <!-- End Date -->
                                 <td class="px-4 py-2 text-xs text-gray-700">
-                                    <div class="flex items-center">
+                                    <div class="flex items-center dark:text-gray-400">
                                         {{ $demande->end_date ? \Carbon\Carbon::parse($demande->end_date)->format('M d, Y') : '—' }}
                                     </div>
                                 </td>
@@ -210,7 +210,7 @@
                                                 </a>
                                                 
                                                 @if($demande->status != 'expired')
-                                                    <button onclick="openApprovalModal({{ $demande->id }}, '{{ $demande->person->fullname ?? '' }}', '{{ $demande->start_date ?? '' }}', '{{ $demande->end_date ?? '' }}', '{{ $demande->project_name ?? '' }}')" 
+                                                    <button onclick="openApprovalModal({{ $demande->id }}, '{{ $demande->person->fullname ?? '' }} }}')" 
                                                             class="text-green-600 hover:text-green-800 transition-colors duration-150" 
                                                             title="Approve Demande">
                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
@@ -244,11 +244,11 @@
             </div>
 
             <!-- No Results Message -->
-            <div id="no-results" class="hidden p-8 text-center">
+            <div id="no-results" class="hidden p-8 text-center dark:bg-gray-800">
                 <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                 </svg>
-                <h3 class="mt-2 text-sm font-medium text-gray-900">Aucune demande trouvée</h3>
+                <h3 class="mt-2 text-sm font-medium text-gray-900 dark:text-gray-400">Aucune demande trouvée</h3>
                 <p class="mt-1 text-sm text-gray-500">Essayez d'ajuster vos termes de recherche ou vos filtres.</p>
             </div>
         </div>
@@ -498,7 +498,7 @@
                     });
                     
                     const total = allRows.length;
-                    searchStats.textContent = `Showing ${filteredRows.length} of ${total} demandes`;
+                    searchStats.textContent = `Affichage de ${filteredRows.length}  personnes sur ${total} `;
                 }
             }
 
@@ -577,14 +577,12 @@
         }
 
         // Keep your existing modal functions
-        function openApprovalModal(demandeId, fullname, startDate, endDate) {
+        function openApprovalModal(demandeId, fullname,) {
             // Set form action URL
             document.getElementById('approvalForm').action = `/demande/${demandeId}`;
             
             // Fill form fields
             document.getElementById('modal_fullname').value = fullname;
-            document.getElementById('modal_start_date').value = '';
-            document.getElementById('modal_end_date').value = '';
             
             // Calculate and set initial status
             updateInternshipStatus();

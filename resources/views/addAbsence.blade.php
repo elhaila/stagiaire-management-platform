@@ -8,7 +8,6 @@
                 <h1 class="text-3xl font-bold text-gray-900 dark:text-white">Ajouter une nouvelle absence</h1>
                 <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">Enregistrer une absence pour un stagiaire avec des détails et une justification pertinents.</p>
             </div>
-
             <!-- Form Container -->
             <div class="bg-white dark:bg-gray-800 shadow-xl rounded-xl overflow-hidden">
                 <form action="{{ route('StoreAbsence') }}" method="POST" enctype="multipart/form-data" class="divide-y divide-gray-200 dark:divide-gray-700">
@@ -57,13 +56,30 @@
                                 @enderror
                             </div>
 
-                            <!-- Date -->
+                            <!-- Start Date -->
                             <div class="sm:col-span-1">
-                                <label for="date" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                                    Date d'absence <span class="text-red-500">*</span>
+                                <label for="start_date" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                    Date de début <span class="text-red-500">*</span>
                                 </label>
-                                <input type="date" name="date" id="date" value="{{ old('date', date('Y-m-d')) }}" class="block w-full px-3 py-2 border {{ $errors->has('date') ? 'border-red-300 focus:border-red-500 focus:ring-red-500' : 'border-gray-300 focus:border-indigo-500 focus:ring-indigo-500' }} dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 rounded-md shadow-sm focus:outline-none focus:ring-1 transition-colors duration-200" required>
-                                @error('date')
+                                <input type="date" name="start_date" id="start_date"
+                                min="{{ $internship->start_date }}"
+                                max="{{ (date('Y-m-d') < $internship->end_date) ? date('Y-m-d') : $internship->end_date }}"
+                                class="block w-full px-3 py-2 border {{ $errors->has('start_date') ? 'border-red-300 focus:border-red-500 focus:ring-red-500' : 'border-gray-300 focus:border-indigo-500 focus:ring-indigo-500' }} dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 rounded-md shadow-sm focus:outline-none focus:ring-1 transition-colors duration-200" required>
+                                @error('start_date')
+                                    <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
+                                @enderror
+                            </div>
+
+                            <!-- End Date -->
+                            <div class="sm:col-span-1">
+                                <label for="end_date" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                    Date de fin <span class="text-red-500">*</span>
+                                </label>
+                                <input type="date" name="end_date" id="end_date"
+                                min="{{ $internship->start_date }}"
+                                max="{{$internship->end_date}}"
+                                class="block w-full px-3 py-2 border {{ $errors->has('end_date') ? 'border-red-300 focus:border-red-500 focus:ring-red-500' : 'border-gray-300 focus:border-indigo-500 focus:ring-indigo-500' }} dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 rounded-md shadow-sm focus:outline-none focus:ring-1 transition-colors duration-200" >
+                                @error('end_date')
                                     <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
                                 @enderror
                             </div>
@@ -145,6 +161,20 @@
             const reasonRequired = document.getElementById('reason-required');
             const justificationRequired = document.getElementById('justification-required');
             const fileHelp = document.getElementById('file-help');
+            const startInput = document.getElementById("start_date");
+            const endInput = document.getElementById("end_date");
+
+            startInput.addEventListener("change", function () {
+                // Set the min for end date = selected start date + 1 day
+                let startDate = new Date(this.value);
+                if (this.value) {
+                    // force End Date >= Start Date
+                    endInput.min = this.value;
+                    if (endInput.value && endInput.value < this.value) {
+                        endInput.value = ""; // reset if invalid
+                    }
+                }
+            });
 
             function toggleFieldsBasedOnStatus() {
                 const status = statusSelect.value;

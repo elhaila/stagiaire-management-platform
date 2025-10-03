@@ -2,14 +2,14 @@
 @section('content')
     <div class="p-6 space-y-6 overflow-auto">
         <!-- Enhanced Search Section -->
-        <div class="bg-white shadow rounded-lg p-4 mt-6">
+        <div class="bg-white shadow rounded-lg p-4 mt-6 dark:bg-gray-800">
             <div class="flex flex-wrap gap-4 items-center">
                 <!-- Real-time Search Input -->
                 <div class="flex-1 min-w-[250px] relative">
                     <input type="text" 
                            id="search-input" 
-                           placeholder="Search by name, supervisor, type..." 
-                           class="w-full border rounded px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                           placeholder="Recherche par nom, superviseur, type..." 
+                           class="w-full border rounded px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:border-transparent dark:text-white">
                     <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
                         <svg class="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
@@ -18,14 +18,14 @@
                 </div>
 
                 <!-- Type Filter -->
-                <select id="type-filter" class="border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <select id="type-filter" class="border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white dark:border-gray-800">
                     <option value="">toute sorte</option>
                     <option value="pfe">PFE</option>
                     <option value="stage">Stage</option>
                 </select>
 
                 <!-- Status Filter -->
-                <select id="status-filter" class="border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <select id="status-filter" class="border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white dark:border-gray-800">
                     <option value="">tous les statuts</option>
                     <option value="active">actif</option>
                     <option value="pending">pendant</option>
@@ -34,7 +34,7 @@
                 </select>
 
                 <!-- Sort Options -->
-                <select id="sort-select" class="border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <select id="sort-select" class="border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white dark:border-gray-800">
                     <option value="name-asc">Name A-Z</option>
                     <option value="name-desc">Name Z-A</option>
                     <option value="date-newest">Le plus récent en premier</option>
@@ -58,58 +58,58 @@
             </div>
         </div>
 
-        <h2 class="text-lg font-semibold mb-4 inline-block">Liste des stagiaires</h2>
+        <h2 class="text-lg font-semibold mb-4 inline-block dark:text-white">Liste des stagiaires</h2>
 
         <!-- Results Container -->
         <div class="bg-white shadow rounded-lg overflow-hidden">
             <div class="overflow-x-auto">
-                <table class="min-w-full divide-y divide-gray-200" id="internships-table">
-                    <thead class="bg-gray-50">
+                <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700" id="internships-table">
+                    <thead class="bg-gray-50 dark:bg-gray-700 dark:divide-gray-200">
                         <tr>
-                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase cursor-pointer hover:bg-gray-100" 
+                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase cursor-pointer dark:text-gray-400" 
                                 onclick="sortTable('name')">
                                 nom complet
                                 <svg class="w-3 h-3 inline ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path>
                                 </svg>
                             </th>
-                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase cursor-pointer hover:bg-gray-100"
+                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase cursor-pointer dark:text-gray-400"
                                 onclick="sortTable('supervisor')">
                                 superviseur
                                 <svg class="w-3 h-3 inline ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path>
                                 </svg>
                             </th>
-                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">projet</th>
-                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Type</th>
-                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase cursor-pointer hover:bg-gray-100"
+                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase dark:text-gray-400">projet</th>
+                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase dark:text-gray-400">Type</th>
+                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase cursor-pointer dark:text-gray-400"
                                 onclick="sortTable('status')">
                                 statut
                                 <svg class="w-3 h-3 inline ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path>
                                 </svg>
                             </th>
-                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase cursor-pointer hover:bg-gray-100"
+                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase cursor-pointer dark:text-gray-400"
                                 onclick="sortTable('start')">
                                 date de début
                                 <svg class="w-3 h-3 inline ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path>
                                 </svg>
                             </th>
-                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase cursor-pointer hover:bg-gray-100"
+                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase cursor-pointer dark:text-gray-400"
                                 onclick="sortTable('end')">
                                 date de fin
                                 <svg class="w-3 h-3 inline ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path>
                                 </svg>
                             </th>
-                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Actions</th>
+                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase dark:text-gray-400">Actions</th>
                         </tr>
                     </thead>
                     
-                    <tbody id="internships-table-body" class="bg-white divide-y divide-gray-200">
+                    <tbody id="internships-table-body" class="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-800">
                         @foreach ($Internships as $Internship)
-                            <tr class="internship-row hover:bg-gray-50 transition-colors duration-150" 
+                            <tr class="internship-row transition-colors duration-150" 
                                 data-internship-id="{{ $Internship->id }}"
                                 data-name="{{ strtolower($Internship->demande->person->fullname ?? '') }}" 
                                 data-supervisor="{{ strtolower($Internship->user->name ?? '') }}" 
@@ -129,10 +129,10 @@
                                             </div>
                                         </div>
                                         <div class="ml-3">
-                                            <div class="text-sm font-medium text-gray-900 name-highlight">
+                                            <div class="text-sm font-medium text-gray-900 name-highlight dark:text-white">
                                                 {{ $Internship->demande->person->fullname ?? '—' }}
                                             </div>
-                                            <div class="text-xs text-gray-500">
+                                            <div class="text-xs text-gray-500 dark:text-gray-400">
                                                 {{ $Internship->demande->diplome->name ?? '' }}
                                             </div>
                                         </div>
@@ -144,15 +144,15 @@
                                     <div class="flex items-center">
                                         @if($Internship->user)
                                             <div class="flex-shrink-0 h-6 w-6">
-                                                <div class="h-6 w-6 rounded-full bg-green-500 flex items-center justify-center text-white text-xs font-medium">
+                                                <div class="h-6 w-6 rounded-full bg-green-500 flex items-center justify-center text-white text-xs font-medium dark:text-gray-400">
                                                     {{ substr($Internship->user->name, 0, 1) }}
                                                 </div>
                                             </div>
                                             <div class="ml-2">
-                                                <span class="supervisor-highlight">{{ $Internship->user->name }}</span>
+                                                <span class="supervisor-highlight dark:text-gray-400">{{ $Internship->user->name }}</span>
                                             </div>
                                         @else
-                                            <span class="text-gray-400">aucun superviseur</span>
+                                            <span class="text-gray-400 dark:text-gray-400">aucun superviseur</span>
                                         @endif
                                     </div>
                                 </td>
@@ -162,10 +162,10 @@
                                     <div class="flex items-center">
                                         @if($Internship->project_name)
                                             <div class="ml-2">
-                                                <span class="supervisor-highlight">{{ $Internship->project_name }}</span>
+                                                <span class="supervisor-highlight dark:text-gray-400">{{ $Internship->project_name }}</span>
                                             </div>
                                         @else
-                                             <span class="supervisor-highlight">___</span>
+                                             <span class="supervisor-highlight dark:text-gray-400">___</span>
                                         @endif
                                     </div>
                                 </td>
@@ -208,14 +208,14 @@
 
                                 <!-- Start Date -->
                                 <td class="px-4 py-2 text-xs text-gray-700">
-                                    <div class="flex items-center">
+                                    <div class="flex items-center dark:text-gray-400">
                                         {{ $Internship->start_date ? \Carbon\Carbon::parse($Internship->start_date)->format('M d, Y') : '—' }}
                                     </div>
                                 </td>
 
                                 <!-- End Date -->
                                 <td class="px-4 py-2 text-xs text-gray-700">
-                                    <div class="flex items-center">
+                                    <div class="flex items-center dark:text-gray-400">
                                         {{ $Internship->end_date ? \Carbon\Carbon::parse($Internship->end_date)->format('M d, Y') : '—' }}
                                     </div>
                                 </td>
@@ -351,11 +351,11 @@
             </div>
 
             <!-- No Results Message -->
-            <div id="no-results" class="hidden p-8 text-center">
+            <div id="no-results" class="hidden p-8 text-center dark:bg-gray-800">
                 <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                 </svg>
-                <h3 class="mt-2 text-sm font-medium text-gray-900">No internships found</h3>
+                <h3 class="mt-2 text-sm font-medium text-gray-900 dark:text-gray-400">No internships found</h3>
                 <p class="mt-1 text-sm text-gray-500">Try adjusting your search terms or filters.</p>
             </div>
         </div>
@@ -595,7 +595,7 @@
                     });
                     
                     const total = allRows.length;
-                    searchStats.textContent = `Showing ${filteredRows.length} of ${total} internships`;
+                    searchStats.textContent = `Affichage de ${filteredRows.length}  personnes sur ${total} `;
                 }
             }
 

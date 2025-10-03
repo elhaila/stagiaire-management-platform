@@ -33,11 +33,11 @@ class AbsenceController extends Controller
      */
     public function store(Request $request)
     {
-        
         // Dynamic validation rules based on status
         $rules = [
             'internship_id' => 'required|exists:internships,id',
-            'date' => 'required|date',
+            'start_date' => 'required|date',
+            'end_date' => 'nullable|date',
             'status' => 'required|in:justified,unjustified',
         ];
 
@@ -60,7 +60,8 @@ class AbsenceController extends Controller
 
             $absence = new Absence();
             $absence->internship_id = $request->internship_id;
-            $absence->date = $request->date;
+            $absence->start_date = $request->start_date;
+            $absence->end_date = $request->end_date;
             $absence->status = $request->status;
             
             // Only set reason and justification for justified absences
@@ -88,7 +89,7 @@ class AbsenceController extends Controller
 
             return redirect()
                 ->route('absenceList')
-                ->with('success', 'Absence recorded successfully for ' . $internship->demande->person->fullname);
+                ->with('success', 'Absence enregistrée avec succès pour' . $internship->demande->person->fullname);
 
         } catch (\Exception $e) {
             return back()

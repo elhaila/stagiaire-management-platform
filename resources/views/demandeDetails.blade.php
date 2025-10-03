@@ -1,5 +1,6 @@
 @extends('layouts.layout')
 @section('content')
+
     <!-- Main Content -->
     <div class="min-h-screen bg-gray-50 dark:bg-gray-900 py-6 overflow-auto" style="padding-bottom: 100px">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -11,7 +12,7 @@
                 </div>
                 <div class="flex space-x-3">
                     @if($demande->status === 'pending')
-                        <button onclick="openApprovalModal({{ $demande->id }}, '{{ $demande->person->fullname ?? '' }}', '{{ $demande->start_date ?? '' }}', '{{ $demande->end_date ?? '' }}')" class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700">
+                        <button onclick="openApprovalModal({{ $demande->id }}, '{{ $demande->person->fullname ?? '' }}')" class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700">
                             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                             </svg>
@@ -237,7 +238,7 @@
                                 <span class="text-sm text-gray-500 dark:text-gray-400">Jours jusqu'au début :</span>
                                 <span class="text-sm font-medium text-gray-900 dark:text-gray-100">
                                     @if(\Carbon\Carbon::parse($demande->start_date)->isFuture())
-                                        {{ \Carbon\Carbon::now()->diffInDays(\Carbon\Carbon::parse($demande->start_date)) }} jours
+                                        {{ number_format(\Carbon\Carbon::now()->floatDiffInDays(\Carbon\Carbon::parse($demande->start_date)), 2) }} jours
                                     @else
                                         démarré
                                     @endif
@@ -359,6 +360,12 @@
                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg bg-gray-50 text-gray-600 cursor-not-allowed focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors" 
                                    readonly>
                         </div>
+                        {{-- Project name --}}
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">nom du projet</label>
+                            <input type="text" id="Project" name="Project"  
+                                   class="w-full px-3 py-2 border border-gray-300 rounded-lg text-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors" >
+                        </div>
 
                         <!-- Start Date -->
                         <div>
@@ -387,7 +394,7 @@
                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg bg-gray-50 text-gray-600 cursor-not-allowed focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors" 
                                    readonly>
                         </div>
-
+                        
                         <!-- Supervisor Selection -->
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">
@@ -405,7 +412,6 @@
                             </select>
                         </div>
                     </div>
-
                     <!-- Hidden fields -->
                     <input type="hidden" name="status" value="accepted">
                     <input type="hidden" name="create_internship" value="1">
@@ -488,14 +494,12 @@
     </style>
 
     <script>
-        function openApprovalModal(demandeId, fullname, startDate, endDate) {
+        function openApprovalModal(demandeId, fullname) {
             // Set form action URL
             document.getElementById('approvalForm').action = `/demande/${demandeId}`;
             
             // Fill form fields
             document.getElementById('modal_fullname').value = fullname;
-            document.getElementById('modal_start_date').value = '';
-            document.getElementById('modal_end_date').value = '';
             
             // Calculate and set initial status
             updateInternshipStatus();

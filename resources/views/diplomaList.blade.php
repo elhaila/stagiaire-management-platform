@@ -44,7 +44,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="ml-3">
-                                                    <div class="text-sm font-medium text-gray-900 name-highlight">
+                                                    <div class="text-sm font-medium text-gray-900 name-highlight dark:text-white">
                                                         {{ $diploma->name ?? '—' }}
                                                     </div>
                                                 </div>
@@ -65,13 +65,13 @@
                                             </form>
                                             <!-- Inline Edit Form Row (Hidden by default) -->
                                             <tr class="edit-form-row hidden" id="edit-form-{{ $diploma->id }}">
-                                                <td colspan="7" class="px-4 py-4 bg-gray-50 border-l-4 border-indigo-500">
+                                                <td colspan="7" class="px-4 py-4 bg-gray-50 border-l-4 border-indigo-500 dark:bg-gray-900/50">
                                                     <form action="{{route('updateDiploma',$diploma->id)}}" method="POST" class="inline-edit-form">
                                                         @csrf
                                                         @method('PUT')
-                                                        <div class="bg-white rounded-lg p-4 shadow-sm border">
+                                                        <div class="bg-white rounded-lg p-4 shadow-sm border dark:bg-gray-800">
                                                             <div class="mb-3">
-                                                                <h4 class="text-sm font-medium text-gray-900 mb-2 flex items-center">
+                                                                <h4 class="text-sm font-medium text-gray-900 mb-2 flex items-center dark:text-gray-300">
                                                                     <svg class="w-4 h-4 mr-2 text-indigo-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                                                                         <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 3.75V16.5L12 14.25 7.5 16.5V3.75m9 0H18A2.25 2.25 0 0 1 20.25 6v12A2.25 2.25 0 0 1 18 20.25H6A2.25 2.25 0 0 1 3.75 18V6A2.25 2.25 0 0 1 6 3.75h1.5m9 0h-9" />
                                                                     </svg>
@@ -81,14 +81,14 @@
 
                                                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                                                                     <div>
-                                                                    <label for="name" class="block text-xs font-medium text-gray-700 mb-1">
+                                                                    <label for="name" class="block text-xs font-medium text-gray-700 mb-1 dark:text-gray-300">
                                                                         Nome
                                                                     </label>
                                                                     <input type="text" 
                                                                         name="name" 
                                                                         id="name"
                                                                         value="{{$diploma->name}}"
-                                                                        class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                                                                        class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-white rounded-lg px-4 py-2"">
                                                                 </div>
                                                             </div>
 

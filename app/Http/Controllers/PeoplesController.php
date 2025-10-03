@@ -48,9 +48,8 @@ class PeoplesController extends Controller
             'phone' => $request->input('phone'),
         ]);
 
-        return redirect()->route('CreatePerson')
-            ->with('success', 'A new person has been added successfully.')
-            ->with('person_id', $person->id);
+        return redirect()->route('showPerson', $person->id)
+            ->with('success', 'A new person has been added successfully.');
     }
 
     /**

@@ -119,7 +119,8 @@
                                 <label for="start" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                                     Date de début <span class="text-red-500">*</span>
                                 </label>
-                                <input type="date" name="start" id="start" value="{{ old('start') }}" class="block w-full px-3 py-2 border {{ $errors->has('start') ? 'border-red-300 focus:border-red-500 focus:ring-red-500' : 'border-gray-300 focus:border-indigo-500 focus:ring-indigo-500' }} dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 rounded-md shadow-sm focus:outline-none focus:ring-1 transition-colors duration-200" required>
+                                <input min="{{ date('Y-m-d', strtotime('+1 day')) }}" type="date" name="start" id="start" value="{{ old('start') }}" class="block w-full px-3 py-2 border {{ $errors->has('start') ? 'border-red-300 focus:border-red-500 focus:ring-red-500' : 'border-gray-300 focus:border-indigo-500 focus:ring-indigo-500' }} dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 rounded-md shadow-sm focus:outline-none focus:ring-1 transition-colors duration-200" required>
+                                <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">La date de début doit être demain ou plus tard.</p>
                                 @error('start')
                                     <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
                                 @enderror
@@ -131,6 +132,7 @@
                                     Date de fin <span class="text-red-500">*</span>
                                 </label>
                                 <input type="date" name="end" id="end" value="{{ old('end') }}" class="block w-full px-3 py-2 border {{ $errors->has('end') ? 'border-red-300 focus:border-red-500 focus:ring-red-500' : 'border-gray-300 focus:border-indigo-500 focus:ring-indigo-500' }} dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 rounded-md shadow-sm focus:outline-none focus:ring-1 transition-colors duration-200" required>
+                                <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">La date de fin doit être au moins un mois après la date de début.</p>
                                 @error('end')
                                     <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
                                 @enderror
@@ -181,4 +183,20 @@
             </div>
         </div>
     </div>
+<script>
+    document.getElementById('start').addEventListener('change', function() {
+    let startDate = new Date(this.value);
+
+    if (!isNaN(startDate.getTime())) {
+        let endDate = new Date(startDate);
+        endDate.setMonth(endDate.getMonth() + 1); // +1 month
+
+        let endInput = document.getElementById('end');
+
+        // Force the end date to be exactly one month after
+        endInput.value = endDate.toISOString().split('T')[0];
+        endInput.setAttribute('min', endInput.value);
+    }
+});
+</script>
 @endsection

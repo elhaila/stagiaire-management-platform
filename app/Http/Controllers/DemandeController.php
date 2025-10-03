@@ -114,7 +114,7 @@ class DemandeController extends Controller
                     $start = strtotime($value);
                     $tomorrow = strtotime(date('Y-m-d', strtotime('+1 day')));
                     if ($start < $tomorrow) {
-                        $fail('The start date must be tomorrow or later.');
+                        $fail('La date de début doit être demain ou plus tard.');
                     }
                 }
             ],
@@ -126,7 +126,7 @@ class DemandeController extends Controller
                 $start = strtotime($request->input('start'));
                 $end = strtotime($value);
                 if ($end - $start < 30 * 24 * 60 * 60) {
-                $fail('The end date must be at least one month after the start date.');
+                $fail('La date de fin doit être au moins un mois après la date de début.');
                 }
             }
             ],
@@ -156,7 +156,7 @@ class DemandeController extends Controller
         $demande->status = $request->input('status');
         $demande->save();
 
-        return redirect()->route('demandeList')->with('success', 'Demande created successfully.');
+        return redirect()->route('showdemande', $demande->id)->with('success', 'Demande créé avec succès.');
     }
 
     public function addDemande($person_id = null)
@@ -346,12 +346,12 @@ class DemandeController extends Controller
 
             DB::commit();
 
-            return redirect()->route('demandeList')
-                ->with('success', $demande->person->fullname . ' Demande approved and internship created successfully.');
+            return redirect()->route('showIntern', $internship->id)
+                ->with('success', $demande->person->fullname . 'Demande approuvée et stage créé avec succès.');
 
         } catch (\Exception $e) {
             DB::rollback();
-            return back()->withErrors(['error' => 'Failed to approve demande: ' . $e->getMessage()])->withInput();
+            return back()->withErrors(['error' => 'Échec de l\'approbation de la demande : ' . $e->getMessage()])->withInput();
         }
     }
 

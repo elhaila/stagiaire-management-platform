@@ -140,7 +140,7 @@
                                 <label for="note" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                                     description
                                 </label>
-                                <textarea name="note" id="note" rows="4" placeholder="Notes ou description supplémentaires concernant la demande de stage..." class="block w-full px-3 py-2 border {{ $errors->has('note') ? 'border-red-300 focus:border-red-500 focus:ring-red-500' : 'border-gray-300 focus:border-indigo-500 focus:ring-indigo-500' }} dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 rounded-md shadow-sm focus:outline-none focus:ring-1 transition-colors duration-200 resize-none">{{ old('note') }}</textarea>
+                                <textarea name="note" id="note" rows="4" placeholder="Notes ou description supplémentaires concernant la demande de stage..." class="block w-full px-3 py-2 border {{ $errors->has('note') ? 'border-red-300 focus:border-red-500 focus:ring-red-500' : 'border-gray-300 focus:border-indigo-500 focus:ring-indigo-500' }} dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 rounded-md shadow-sm focus:outline-none focus:ring-1 transition-colors duration-200 resize-none">{{ $demande->description }}</textarea>
                                 @error('note')
                                     <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
                                 @enderror

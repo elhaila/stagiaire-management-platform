@@ -3,14 +3,14 @@
 @section('content')
     <div class="p-6 space-y-6 overflow-auto">
         <!-- Enhanced Search Section -->
-        <div class="bg-white shadow rounded-lg p-4 mt-6">
+        <div class="bg-white shadow rounded-lg p-4 mt-6 dark:bg-gray-800">
             <div class="flex flex-wrap gap-4 items-center">
                 <!-- Real-time Search Input -->
                 <div class="flex-1 min-w-[250px] relative">
                     <input type="text" 
                            id="search-input" 
                            placeholder="Rechercher par nom, CIN, courriel ou téléphone..." 
-                           class="w-full border rounded px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                           class="w-full border rounded px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:text-white dark:bg-gray-700 dark:border-transparent ">
                     <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
                         <svg class="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
@@ -19,7 +19,7 @@
                 </div>
 
                 <!-- Sort Options -->
-                <select id="sort-select" class="border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <select id="sort-select" class="border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-800 dark:text-white">
                     <option value="name-asc">Name A-Z</option>
                     <option value="name-desc">Name Z-A</option>
                     <option value="date-newest">Le plus récent en premier</option>
@@ -41,45 +41,45 @@
             </div>
         </div>
 
-        <h2 class="text-lg font-semibold mb-4 inline-block">Liste de personnes</h2>
+        <h2 class="text-lg font-semibold mb-4 inline-block dark:text-white">Liste de personnes</h2>
 
         <!-- Results Container -->
         <div class="bg-white shadow rounded-lg overflow-hidden" style="font-size: small">
             <div class="overflow-x-auto">
-                <table class="min-w-full divide-y divide-gray-200">
-                    <thead class="bg-gray-50">
+                <table class="min-w-full w-full table-fixed divide-y divide-gray-200 dark:divide-gray-700">
+                    <thead class="bg-gray-50 dark:bg-gray-700 dark:divide-gray-700">
                         <tr>
-                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase cursor-pointer hover:bg-gray-100" 
+                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase cursor-pointer dark:text-gray-400" 
                                 onclick="sortTable('name')">
                                 Nom complet 
                                 <svg class="w-3 h-3 inline ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path>
                                 </svg>
                             </th>
-                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">CIN</th>
-                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Email</th>
-                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">TÉLÉPHONE</th>
-                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase cursor-pointer hover:bg-gray-100" 
+                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase dark:text-gray-400">CIN</th>
+                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase dark:text-gray-400">Email</th>
+                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase dark:text-gray-400">TÉLÉPHONE</th>
+                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase cursor-pointer  dark:text-gray-400" 
                                 onclick="sortTable('demandes')">
                                 DEMANDES 
                                 <svg class="w-3 h-3 inline ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path>
                                 </svg>
                             </th>
-                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase cursor-pointer hover:bg-gray-100" 
+                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase cursor-pointer dark:text-gray-400" 
                                 onclick="sortTable('date')">
                                 Date d'inscription
                                 <svg class="w-3 h-3 inline ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path>
                                 </svg>
                             </th>
-                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">ACTIONS</th>
+                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase dark:text-gray-400">ACTIONS</th>
                         </tr>
                     </thead>
                     
-                    <tbody id="people-table-body" class="bg-white divide-y divide-gray-200">
+                    <tbody id="people-table-body" class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700 ">
                         @foreach($people as $person)
-                        <tr class="person-row hover:bg-gray-50 transition-colors duration-150" 
+                        <tr class="person-row transition-colors duration-150" 
                             data-name="{{ strtolower($person->fullname) }}" 
                             data-cin="{{ strtolower($person->cin) }}" 
                             data-email="{{ strtolower($person->email) }}" 
@@ -88,7 +88,7 @@
                             data-date="{{ $person->created_at }}"
                             data-search-text="{{ strtolower($person->fullname . ' ' . $person->cin . ' ' . $person->email . ' ' . $person->phone) }}">
                             
-                            <td class="px-4 py-2 whitespace-nowrap">
+                            <td class="px-4 py-2 whitespace-nowrap overflow-hidden text-ellipsis">
                                 <div class="flex items-center">
                                     <div class="flex-shrink-0 h-8 w-8">
                                         <div class="h-8 w-8 rounded-full bg-indigo-500 flex items-center justify-center text-white text-sm font-medium">
@@ -96,27 +96,27 @@
                                         </div>
                                     </div>
                                     <div class="ml-3">
-                                        <div class="text-gray-900 name-highlight" style="font-size: small">{{ $person->fullname }}</div>
+                                        <div class="text-gray-900 name-highlight dark:text-gray-400" style="font-size: small">{{ $person->fullname }}</div>
                                     </div>
                                 </div>
                             </td>
-                            <td class="px-4 py-2 whitespace-nowrap">
-                                <span class="cin-highlight">{{ $person->cin }}</span>
+                            <td class="px-4 py-2 whitespace-nowrap overflow-hidden text-ellipsis">
+                                <span class="cin-highlight dark:text-gray-400">{{ $person->cin }}</span>
                             </td>
-                            <td class="px-4 py-2 whitespace-nowrap">
-                                <span class="email-highlight">{{ $person->email }}</span>
+                            <td class="px-4 py-2 whitespace-nowrap overflow-hidden text-ellipsis">
+                                <span class="email-highlight dark:text-gray-400">{{ $person->email }}</span>
                             </td>
-                            <td class="px-4 py-2 whitespace-nowrap">
-                                <span class="phone-highlight">{{ $person->phone }}</span>
+                            <td class="px-4 py-2 whitespace-nowrap overflow-hidden text-ellipsis">
+                                <span class="phone-highlight dark:text-gray-400">{{ $person->phone }}</span>
                             </td>
-                            <td class="px-4 py-2 whitespace-nowrap">
+                            <td class="px-4 py-2 whitespace-nowrap overflow-hidden text-ellipsis">
                                 <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium 
                                     {{ $person->demandes->count() > 2 ? 'bg-green-100 text-green-800' : 
                                        ($person->demandes->count() > 0 ? 'bg-blue-100 text-blue-800' : 'bg-gray-100 text-gray-800') }}">
                                     {{ $person->demandes->count() }}
                                 </span>
                             </td>
-                            <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-500">
+                            <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400 overflow-hidden text-ellipsis">
                                 {{ $person->created_at->format('M d, Y') }}
                             </td>
                             <td class="px-4 py-2 whitespace-nowrap">
@@ -145,12 +145,12 @@
             </div>
 
             <!-- No Results Message -->
-            <div id="no-results" class="hidden p-8 text-center">
+            <div id="no-results" class="hidden p-8 text-center dark:bg-gray-800">
                 <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                 </svg>
-                <h3 class="mt-2 text-sm font-medium text-gray-900">No people found</h3>
-                <p class="mt-1 text-sm text-gray-500">Try adjusting your search terms or clearing the search.</p>
+                <h3 class="mt-2 text-sm font-medium text-gray-900 dark:text-gray-400">Personne n'a trouvé</h3>
+                <p class="mt-1 text-sm text-gray-500">Essayez d'ajuster vos termes de recherche ou de supprimer la recherche.</p>
             </div>
         </div>
     </div>
