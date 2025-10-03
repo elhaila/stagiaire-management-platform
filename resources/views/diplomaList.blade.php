@@ -128,7 +128,7 @@
             </main>
 
 
-            <aside class="lg:col-span-1">
+            <div class="lg:col-span-1">
                 <div class="bg-white dark:bg-gray-800 shadow-lg rounded-xl p-6 sticky top-8">
                     <div class="flex justify-between items-center mb-4">
                         <h2 class="text-xl font-bold text-gray-900 dark:text-white">
@@ -149,7 +149,7 @@
                         </div>
                     </form>
                 </div>
-            </aside>
+            </div>
         </div>
     </div>
 </div>

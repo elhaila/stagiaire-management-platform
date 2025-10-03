@@ -2,7 +2,7 @@
 @section('content')
     <!-- Main Content -->
     <div class="min-h-screen bg-gray-50 dark:bg-gray-900 py-6 overflow-auto" style="padding-bottom: 100px">
-        {{-- debug loop of all the errors that comes --}}
+        {{-- debug loop of all the errors that comes
         @if ($errors->any())
             <div class="mb-4">
             <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
@@ -14,7 +14,7 @@
                 </ul>
             </div>
             </div>
-        @endif
+        @endif --}}
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Header -->
             <div class="mb-8">

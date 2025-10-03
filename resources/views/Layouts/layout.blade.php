@@ -35,6 +35,12 @@
         .sidebar-open aside .logo-text {
             display: inline-block;
         }
+        #sidebar-toggle svg {
+        transition: transform 0.3s ease;
+        }
+        #sidebar-toggle.rotated svg {
+        transform: rotate(180deg);
+        }
     </style>
 
 </head>
@@ -163,11 +169,10 @@
                             </svg>
                         </button>
                         <button id="sidebar-toggle" class="hidden md:inline-flex p-2 text-gray-500 hover:text-gray-700">
-                            <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 5.25h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5" />
+                            <svg class="w-6 h-6 dark:text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m18.75 4.5-7.5 7.5 7.5 7.5m-6-15L5.25 12l7.5 7.5" />
                             </svg>
-
-                            </button>
+                        </button>
 
                         {{-- User Info --}}
                         <div class="flex items-center space-x-4">
@@ -211,13 +216,26 @@
             });
         });
 
-        const toggleBtn = document.getElementById("sidebar-toggle");
-        toggleBtn?.addEventListener("click", () => {
-            const html = document.documentElement;
-            const isOpen = html.classList.contains("sidebar-open");
-            html.classList.toggle("sidebar-open", !isOpen);
-            html.classList.toggle("sidebar-collapsed", isOpen);
-            localStorage.setItem("isSidebarOpen", JSON.stringify(!isOpen));
+        document.addEventListener("DOMContentLoaded", () => {
+            const toggleBtn = document.getElementById("sidebar-toggle");
+            if (!toggleBtn) return;
+
+            // check saved state
+            const isOpen = JSON.parse(localStorage.getItem("isSidebarOpen") ?? "true");
+            toggleBtn.classList.toggle("rotated", !isOpen);
+
+            toggleBtn.addEventListener("click", () => {
+                const html = document.documentElement;
+                const currentlyOpen = html.classList.contains("sidebar-open");
+
+                // toggle sidebar
+                html.classList.toggle("sidebar-open", !currentlyOpen);
+                html.classList.toggle("sidebar-collapsed", currentlyOpen);
+                localStorage.setItem("isSidebarOpen", JSON.stringify(!currentlyOpen));
+
+                // toggle rotation
+                toggleBtn.classList.toggle("rotated", !currentlyOpen);
+            });
         });
     </script>
 </body>
