@@ -1,7 +1,7 @@
 @extends('layouts.layout')
 
 @section('content')
-    <div class="p-6 space-y-6 overflow-auto">
+    <div class="p-6 space-y-6">
         <!-- Enhanced Search Section -->
         <div class="bg-white shadow rounded-lg p-4 mt-6 dark:bg-gray-800">
             <div class="flex flex-wrap gap-4 items-center">

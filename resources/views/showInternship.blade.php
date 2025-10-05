@@ -7,7 +7,7 @@
     <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-8">
         <div>
             <h1 class="text-3xl font-bold text-gray-900 dark:text-white">
-                <span class=" text-indigo-500" >{{ $internships->demande->person->fullname }}</span>  Internship Details
+                <span class=" text-indigo-500" >{{ $internships->demande->person->fullname }}</span> Détails du stage
             </h1>
         </div>
         
@@ -88,29 +88,29 @@
                 <div class="p-6">
                     <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Documents</h2>
                     <ul class="space-y-4">
-                        {{-- CV --}}
-                        <li class="flex items-center justify-between p-3 border border-gray-200 dark:border-gray-700 rounded-lg">
+                        <li class="flex flex-col sm:flex-row sm:items-center sm:justify-between p-3 border border-gray-200 dark:border-gray-700 rounded-lg gap-3">
                             <div class="flex items-center">
-                                <svg class="w-8 h-8 text-indigo-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                <svg class="w-8 h-8 text-indigo-500 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                                 </svg>
                                 <div class="ml-4">
-                                    <p class="text-sm font-medium text-gray-900 dark:text-gray-100">curriculum vitae (CV)</p>
+                                    <p class="text-sm font-medium text-gray-900 dark:text-gray-100">Curriculum Vitae (CV)</p>
                                     @if($internships->demande->cv)
                                         <p class="text-xs text-gray-500 dark:text-gray-400">Téléchargé {{ $internships->demande->updated_at->format('M d, Y') }}</p>
                                     @else
-                                        <p class="text-xs text-red-500 dark:text-red-400">non téléchargé</p>
+                                        <p class="text-xs text-red-500 dark:text-red-400">Non téléchargé</p>
                                     @endif
                                 </div>
                             </div>
                             @if($internships->demande->cv)
-                                <a href="{{ route('demande.downloadCV', $internships->demande->id) }}" class="text-indigo-600 hover:text-indigo-800 dark:text-indigo-400 text-sm font-semibold">Download</a>
-                                @if($internships->demande->cv)
-                                        <a href="{{ Storage::url($internships->demande->cv) }}" target="_blank"
-                                        class="text-indigo-600 hover:text-indigo-800 dark:text-indigo-400 text-sm font-semibold">
-                                            Afficher le CV actuel
-                                        </a>
-                                @endif
+                            <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 w-full sm:w-auto">
+                                <a href="{{ route('demande.downloadCV', $internships->demande->id) }}" class="inline-flex justify-center sm:justify-start items-center px-3 py-1.5 rounded-md text-indigo-600 dark:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-gray-700 text-sm font-semibold transition-colors w-full sm:w-auto">
+                                    Télécharger
+                                </a>
+                                <a href="{{ Storage::url($internships->demande->cv) }}" target="_blank" class="inline-flex justify-center sm:justify-start items-center px-3 py-1.5 rounded-md text-indigo-600 dark:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-gray-700 text-sm font-semibold transition-colors w-full sm:w-auto">
+                                    Afficher le CV actuel
+                                </a>
+                            </div>
                             @endif
                         </li>
                         

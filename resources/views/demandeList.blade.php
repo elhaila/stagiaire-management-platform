@@ -1,9 +1,21 @@
 @extends('layouts.layout')
 @section('content')
+    <style>
+        .scroll-hint::after {
+            content: "";
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 20px;
+            height: 100%;
+            background: linear-gradient(to left, rgba(0,0,0,0.1), transparent);
+            pointer-events: none;
+        }
+    </style>
     <div class="p-6 space-y-6 overflow-auto">
         <!-- Enhanced Search Section -->
         <div class="bg-white shadow rounded-lg p-4 mt-6 dark:bg-gray-800">
-            <div class="flex flex-wrap gap-4 items-center">
+            <div class="flex flex-wrap gap-4 items-center ">
                 <!-- Real-time Search Input -->
                 <div class="flex-1 min-w-[250px] relative">
                     <input type="text" 
@@ -59,9 +71,9 @@
         <h2 class="text-lg font-semibold mb-4 inline-block dark:text-white">List des demande</h2>
 
         <!-- Results Container -->
-       <div class="bg-white shadow rounded-lg overflow-hidden" style="font-size: small">
-            <div class="overflow-x-auto">
-                <table class="min-w-full w-full table-fixed divide-y divide-gray-200 dark:divide-gray-700">
+       <div class="bg-white shadow rounded-lg overflow-hidden dark:bg-gray-800" style="font-size: small">
+            <div class="overflow-x-scroll relative scroll-hint">
+                <table class="min-w-full table-auto divide-y divide-gray-200 dark:divide-gray-700">
                     <thead class="bg-gray-50 dark:bg-gray-700 ">
                         <tr>
                             <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase cursor-pointer dark:text-gray-400" 
@@ -210,7 +222,7 @@
                                                 </a>
                                                 
                                                 @if($demande->status != 'expired')
-                                                    <button onclick="openApprovalModal({{ $demande->id }}, '{{ $demande->person->fullname ?? '' }} }}')" 
+                                                    <button onclick="openApprovalModal({{ $demande->id }}, '{{ $demande->person->fullname ?? '' }}')" 
                                                             class="text-green-600 hover:text-green-800 transition-colors duration-150" 
                                                             title="Approve Demande">
                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">

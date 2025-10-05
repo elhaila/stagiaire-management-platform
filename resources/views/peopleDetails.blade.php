@@ -6,25 +6,25 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Header with Actions -->
             <div class="mb-8 flex justify-between items-start">
-                <div>
+                <div class="mb-8 flex flex-col sm:flex-row justify-between items-start gap-4">
                     <div class="flex items-center space-x-4 mb-2">
                         <a href="{{ route('peopleList') }}" class="text-indigo-600 hover:text-indigo-800 dark:text-indigo-400">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
                             </svg>
                         </a>
-                        <h1 class="text-3xl font-bold text-gray-900 dark:text-white">Détails de la personne</h1>
+                        <h2 class="font-bold text-gray-900 dark:text-white">Détails de la personne</h2>
                     </div>
                     <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">Informations complètes sur le profil et l'historique</p>
                 </div>
-                <div class="flex space-x-3">
-                    <a href="{{ route('addDemande', $person->id) }}" class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700">
+                    <div class="flex flex-col sm:flex-row w-full sm:w-auto space-y-2 sm:space-y-0 sm:space-x-3">
+                    <a href="{{ route('addDemande', $person->id) }}" class="inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700">
                         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                         </svg>
                         Ajouter une demande
                     </a>
-                    <a href="{{ route('editPerson', $person->id) }}" class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700">
+                    <a href="{{ route('editPerson', $person->id) }}" class="inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700">
                         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
                         </svg>
@@ -33,7 +33,7 @@
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
                 <!-- Main Details -->
                 <div class="lg:col-span-2 space-y-6">
                     <!-- Personal Information -->
@@ -151,11 +151,11 @@
 
                                             <!-- Related Internships -->
                                             @if($demande->internships->count() > 0)
-                                                <div class="mt-4 pt-4 border-t border-gray-200 dark:border-gray-600">
+                                                <div class="space-y-2 overflow-x-auto pb-2 mt-4 pt-4 border-t border-gray-200 dark:border-gray-600">
                                                     <p class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-3">Stages connexes ({{ $demande->internships->count() }})</p>
-                                                    <div class="space-y-2">
+                                                    <div class="flex flex-col sm:space-y-2">
                                                         @foreach($demande->internships as $internship)
-                                                            <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-3">
+                                                            <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-3 min-w-full">
                                                                 <div class="flex items-center justify-between">
                                                                     <div class="flex items-center space-x-2">
                                                                         <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium

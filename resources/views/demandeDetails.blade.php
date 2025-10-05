@@ -5,12 +5,12 @@
     <div class="min-h-screen bg-gray-50 dark:bg-gray-900 py-6 overflow-auto" style="padding-bottom: 100px">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Header with Actions -->
-            <div class="mb-8 flex justify-between items-start">
-                <div>
+            <div class="w-full mb-5 bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 sm:p-6">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-2">
                     <h1 class="text-3xl font-bold text-gray-900 dark:text-white">Demande Details</h1>
                     <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">Complétez les informations sur la demande de stage</p>
                 </div>
-                <div class="flex space-x-3">
+                <div class="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-3 mt-4 md:mt-0">
                     @if($demande->status === 'pending')
                         <button onclick="openApprovalModal({{ $demande->id }}, '{{ $demande->person->fullname ?? '' }}')" class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700">
                             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -19,11 +19,11 @@
                             approuver
                         </button>
                         
-                        <form action="{{ route('updateDemande', $demande->id) }}" method="POST"  enctype="multipart/form-data">
+                        <form action="{{ route('updateDemande', $demande->id) }}" class="w-full sm:w-auto" method="POST"  enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <input type="hidden" name="status" value="rejected">
-                            <button type="submit" class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700">
+                            <button type="submit" class="inline-flex items-center  w-full sm:w-auto px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
                                 <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                                 </svg>
@@ -85,15 +85,16 @@
                             </h2>
                             <span class="px-3 py-1 rounded-full text-sm font-medium
                                 @if($demande->status === 'pending') bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300
-                                @elseif($demande->status === 'approved') bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300
+                                @elseif($demande->status === 'accepted') bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300
                                 @elseif($demande->status === 'rejected') bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300
                                 @elseif($demande->status === 'expired') bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-300
                                 @else bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300
                                 @endif">
-                                @if($demande->status == 'approved') approuvé
+                                @if($demande->status == 'accepted') accepté
                                 @elseif($demande->status == 'pending') en attente
                                 @elseif($demande->status == 'rejected') rejeté
                                 @elseif($demande->status == 'expired') expiré
+                                @else {{$demande->status}}
                                 @endif
                             </span>
                         </div>

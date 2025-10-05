@@ -60,9 +60,12 @@
     </div>
     @endif
 
-    <div class="flex h-screen">
+    <div class="flex">
         {{-- Sidebar --}}
-        <aside class="hidden md:flex flex-col bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700">
+        <aside id="sidebar"
+            class="fixed inset-y-0 left-0 z-40 w-64 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 
+                    transform -translate-x-full transition-transform duration-300 ease-in-out
+                    md:relative md:translate-x-0 md:flex md:flex-col">
             {{-- Logo --}}
             <div class="h-16 flex items-center justify-center border-b border-gray-200 dark:border-gray-700">
                 <img src="https://dev-ormvah.njt-group.com/assets/images/ormvah.png" alt="ormvah logo" class="h-10 w-auto mr-3">
@@ -156,6 +159,9 @@
             </nav>
         </aside>
 
+        {{-- Overlay for mobile --}}
+        <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 z-30 hidden md:hidden"></div>
+
         {{-- Main Content --}}
         <div class="flex-1 flex flex-col">
             {{-- Header --}}
@@ -163,7 +169,7 @@
                 <div class="px-6">
                     <div class="flex items-center justify-between h-16">
                         {{-- Mobile menu button --}}
-                        <button class="md:hidden p-2 text-gray-500 hover:text-gray-700">
+                        <button id="mobile-menu-toggle" class="md:hidden p-2 text-gray-500 hover:text-gray-700">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                             </svg>
@@ -199,7 +205,7 @@
             </header>
 
             {{-- Content Area --}}
-            <main class="flex-1 overflow-auto">
+            <main class="flex-1 ">
                 @yield('content')
             </main>
         </div>
@@ -207,6 +213,7 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
+            // Alerts auto-dismiss
             const alerts = document.querySelectorAll("[id$='-alert']");
             alerts.forEach(alert => {
                 setTimeout(() => {
@@ -214,29 +221,43 @@
                     setTimeout(() => alert.remove(), 300);
                 }, 5000);
             });
-        });
 
-        document.addEventListener("DOMContentLoaded", () => {
-            const toggleBtn = document.getElementById("sidebar-toggle");
-            if (!toggleBtn) return;
+            // Elements
+            const toggleBtn   = document.getElementById("sidebar-toggle");   // desktop toggle
+            const mobileBtn   = document.getElementById("mobile-menu-toggle"); // mobile toggle
+            const sidebar     = document.getElementById("sidebar");
+            const overlay     = document.getElementById("overlay");
+            const html        = document.documentElement;
 
-            // check saved state
-            const isOpen = JSON.parse(localStorage.getItem("isSidebarOpen") ?? "true");
-            toggleBtn.classList.toggle("rotated", !isOpen);
+            // --- Desktop toggle ---
+            if (toggleBtn) {
+                const isOpen = JSON.parse(localStorage.getItem("isSidebarOpen") ?? "true");
+                toggleBtn.classList.toggle("rotated", !isOpen);
 
-            toggleBtn.addEventListener("click", () => {
-                const html = document.documentElement;
-                const currentlyOpen = html.classList.contains("sidebar-open");
+                toggleBtn.addEventListener("click", () => {
+                    const currentlyOpen = html.classList.contains("sidebar-open");
+                    html.classList.toggle("sidebar-open", !currentlyOpen);
+                    html.classList.toggle("sidebar-collapsed", currentlyOpen);
+                    localStorage.setItem("isSidebarOpen", JSON.stringify(!currentlyOpen));
 
-                // toggle sidebar
-                html.classList.toggle("sidebar-open", !currentlyOpen);
-                html.classList.toggle("sidebar-collapsed", currentlyOpen);
-                localStorage.setItem("isSidebarOpen", JSON.stringify(!currentlyOpen));
+                    toggleBtn.classList.toggle("rotated", currentlyOpen);
+                });
+            }
 
-                // toggle rotation
-                toggleBtn.classList.toggle("rotated", !currentlyOpen);
-            });
+            // --- Mobile toggle ---
+            if (mobileBtn && sidebar && overlay) {
+                mobileBtn.addEventListener("click", () => {
+                    sidebar.classList.toggle("-translate-x-full");
+                    overlay.classList.toggle("hidden");
+                });
+
+                overlay.addEventListener("click", () => {
+                    sidebar.classList.add("-translate-x-full");
+                    overlay.classList.add("hidden");
+                });
+            }
         });
     </script>
+
 </body>
 </html>
